@@ -5,7 +5,7 @@
 [![OnlineDocumentation Status](https://img.shields.io/badge/online%20documentation-generated-brightgreen.svg)](http://cocoadocs.org/docsets/NSMutableNumber)
 
 
-# NSMutableNumber
+# NSMutableNumber 1.1.4 (2025)
 NSMutableNumber - full thread safe mutable NSNumber implementation
 
 
@@ -48,7 +48,7 @@ pod 'NSMutableNumber'
 - Internal logic implemented with C++. Same performance as standard **NSNumber** (see time tests) and minimum amount of memory for storing values(used union's).
 - **NSNumber** can be compared with this class via additional number comparator method **isEqualToNumber:**
 - Category of the **NSNumber** with method **mutableCopy** which return **NSMutableNumber** class.
-
+- Adds NSMutableCopying to NSNumber and NSMutableNumber
 
 # License
 ---------
