@@ -10,13 +10,13 @@
 @implementation MNTests
 
 - (void)setUp {
-    [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+	[super setUp];
+	// Put setup code here. This method is called before the invocation of each test method in the class.
 }
 
 - (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    [super tearDown];
+	// Put teardown code here. This method is called after the invocation of each test method in the class.
+	[super tearDown];
 }
 
 - (void) testIncDec
@@ -208,7 +208,53 @@
 
 	XCTAssertEqual([[NSNumber numberWithUnsignedLongLong:ULLONG_MAX] hash], [[NSMutableNumber numberWithUnsignedLongLong:ULLONG_MAX] hash]);
 	XCTAssertEqual([[NSNumber numberWithInt:-1] hash], [[NSMutableNumber numberWithInt:-1] hash]);
-	XCTAssertEqual([[NSNumber numberWithInt:2] hash], [[NSMutableNumber numberWithShort:2] hash]);
+	NSMutableNumber *mutableNumber = [NSMutableNumber numberWithShort:2];
+	XCTAssertEqual([[NSNumber numberWithInt:2] hash], [mutableNumber hash]);
+	
+	mutableNumber.charValue = 3;
+	XCTAssertEqual([[NSNumber numberWithInt:3] hash], [mutableNumber hash]);
+	
+	mutableNumber.unsignedCharValue = 4;
+	XCTAssertEqual([[NSNumber numberWithInt:4] hash], [mutableNumber hash]);
+	
+	mutableNumber.shortValue = 5;
+	XCTAssertEqual([[NSNumber numberWithInt:5] hash], [mutableNumber hash]);
+	
+	mutableNumber.unsignedShortValue = 6;
+	XCTAssertEqual([[NSNumber numberWithInt:6] hash], [mutableNumber hash]);
+	
+	mutableNumber.intValue = 7;
+	XCTAssertEqual([[NSNumber numberWithInt:7] hash], [mutableNumber hash]);
+	
+	mutableNumber.unsignedIntValue = 8;
+	XCTAssertEqual([[NSNumber numberWithInt:8] hash], [mutableNumber hash]);
+	
+	mutableNumber.longValue = 9;
+	XCTAssertEqual([[NSNumber numberWithInt:9] hash], [mutableNumber hash]);
+	
+	mutableNumber.unsignedLongValue = 10;
+	XCTAssertEqual([[NSNumber numberWithInt:10] hash], [mutableNumber hash]);
+	
+	mutableNumber.longLongValue = 11;
+	XCTAssertEqual([[NSNumber numberWithInt:11] hash], [mutableNumber hash]);
+	
+	mutableNumber.unsignedLongLongValue = 12;
+	XCTAssertEqual([[NSNumber numberWithInt:12] hash], [mutableNumber hash]);
+	
+	mutableNumber.floatValue = 1;
+	XCTAssertEqual([[NSNumber numberWithFloat:1] hash], [mutableNumber hash]);
+	
+	mutableNumber.doubleValue = 10;
+	XCTAssertEqual([[NSNumber numberWithDouble:10] hash], [mutableNumber hash]);
+	
+	mutableNumber.boolValue = 1;
+	XCTAssertEqual([[NSNumber numberWithBool:1] hash], [mutableNumber hash]);
+	
+	mutableNumber.integerValue = -2;
+	XCTAssertEqual([[NSNumber numberWithInteger:-2] hash], [mutableNumber hash]);
+	
+	mutableNumber.unsignedIntegerValue = 3;
+	XCTAssertEqual([[NSNumber numberWithUnsignedInteger:3] hash], [mutableNumber hash]);
 }
 
 - (void)testExample
@@ -313,7 +359,7 @@
 			NSNumber * n = [[NSNumber alloc] initWithUnsignedInteger:1];
 			n = nil;
 		}
-    }];
+	}];
 }
 
 - (void) testCreateM

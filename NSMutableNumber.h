@@ -59,7 +59,7 @@
  <li> Internal logic implemented with C++. Same performance as standart @b NSNumber (see time tests) and minimum ammount of memory for storing values(eg. unions).
  <li> @b NSNumber can be compared with this class via additional number comparator method @b isEqualToNumber:
  */
-@interface NSMutableNumber : NSObject <NSCopying, NSSecureCoding>
+@interface NSMutableNumber : NSObject <NSCopying, NSMutableCopying, NSSecureCoding>
 
 
 /**
@@ -346,7 +346,7 @@
 @end
 
 
-@interface NSNumber(NSMutableNumberMutableCopy)
+@interface NSNumber(NSMutableNumberMutableCopy) <NSMutableCopying>
 
 /**
  @brief Number category with overrided @b mutableCopy method,

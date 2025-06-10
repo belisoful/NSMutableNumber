@@ -46,6 +46,15 @@
 	return n;
 }
 
+#pragma mark - NSMutableCopying
+- (id) mutableCopyWithZone:(nullable NSZone *) zone {
+	_number.lock();
+	NSMutableNumber * n = [[NSMutableNumber allocWithZone:zone] init];
+	_number.copyDataToNumber(&n->_number);
+	_number.unlock();
+	return n;
+}
+
 #pragma mark - NSCoding
 - (void) encodeWithCoder:(NSCoder *) coder {
 	if (coder) {
@@ -472,6 +481,12 @@
 	uint8_t value[32];
 	[self getValue:value];
 	return [[NSMutableNumber alloc] initWithBytes:value objCType:[self objCType]];
+}
+
+- (id) mutableCopyWithZone:(NSZone *)zone {
+	uint8_t value[32];
+	[self getValue:value];
+	return [[NSMutableNumber allocWithZone:zone] initWithBytes:value objCType:[self objCType]];
 }
 
 @end
