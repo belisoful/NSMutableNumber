@@ -47,25 +47,14 @@
 {
 	return [self copyWithZone:nil];
 }
-- (NSNumber*) copyWithZone:(nullable NSZone *) zone {
-	NSNumber * immutableNumber = nil;
+
+- (NSNumber*) copyWithZone:(nullable NSZone *) zone
+{
 	_number.lock();
-	if (_number.isUnsigned()) {
-		if (_number.reserved[0] == sizeof(unsigned char)) immutableNumber = [[NSNumber allocWithZone:zone] initWithUnsignedChar:_number.get<unsigned char>()];
-		else if (_number.reserved[0] == sizeof(unsigned short)) immutableNumber = [[NSNumber allocWithZone:zone] initWithUnsignedShort:_number.get<unsigned short>()];
-		else if (_number.reserved[0] == sizeof(unsigned int)) immutableNumber = [[NSNumber allocWithZone:zone] initWithUnsignedInt:_number.get<unsigned int>()];
-		else immutableNumber = [[NSNumber allocWithZone:zone] initWithUnsignedLongLong:_number.get<unsigned long long>()];
-	} else if (_number.isReal()) {
-		if (_number.reserved[0] == sizeof(float)) immutableNumber = [[NSNumber allocWithZone:zone] initWithFloat:_number.get<float>()];
-		else immutableNumber = [[NSNumber allocWithZone:zone] initWithDouble:_number.get<double>()];
-	} else {
-		if (_number.reserved[0] == sizeof(char)) immutableNumber = [[NSNumber allocWithZone:zone] initWithChar:_number.get<char>()];
-		else if (_number.reserved[0] == sizeof(short)) immutableNumber = [[NSNumber allocWithZone:zone] initWithShort:_number.get<short>()];
-		else if (_number.reserved[0] == sizeof(int)) immutableNumber = [[NSNumber allocWithZone:zone] initWithInt:_number.get<int>()];
-		else immutableNumber = [[NSNumber allocWithZone:zone] initWithLongLong:_number.get<long long>()];
-	}
+	NSMutableNumber * n = [[NSMutableNumber allocWithZone:zone] init];
+	_number.copyDataToNumber(&n->_number);
 	_number.unlock();
-	return immutableNumber;
+	return (NSNumber*)n;
 }
 
 #pragma mark - NSMutableCopying

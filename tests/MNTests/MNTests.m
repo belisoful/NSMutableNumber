@@ -204,10 +204,22 @@
 	XCTAssertEqual([[[NSNumber numberWithBool:YES] mutableCopy] isKindOfClass:[NSMutableNumber class]], YES);
 }
 
-- (void) testEqualToNumber
+- (void) testIsEqualToNumber
 {
+	XCTAssertEqual([[NSNumber numberWithInt:1] isEqualToNumber:(NSNumber *)[NSMutableNumber numberWithInt:0]], NO);
 	XCTAssertEqual([[NSNumber numberWithInt:0] isEqualToNumber:(NSNumber *)[NSMutableNumber numberWithInt:0]], YES);
+	XCTAssertEqual([[NSNumber numberWithInt:52] isEqualToNumber:(NSNumber *)[NSMutableNumber numberWithInt:52]], YES);
 	XCTAssertEqual([[NSNumber numberWithUnsignedLongLong:ULLONG_MAX] isEqualToNumber:(NSNumber *)[NSMutableNumber numberWithUnsignedLongLong:ULLONG_MAX]], YES);
+	
+	XCTAssertEqual([[NSMutableNumber numberWithInt:1] isEqualToNumber:[NSNumber numberWithInt:0]], NO);
+	XCTAssertEqual([[NSMutableNumber numberWithInt:0] isEqualToNumber:[NSNumber numberWithInt:0]], YES);
+	XCTAssertEqual([[NSMutableNumber numberWithInt:52] isEqualToNumber:[NSNumber numberWithInt:52]], YES);
+	XCTAssertEqual([[NSMutableNumber numberWithUnsignedLongLong:ULLONG_MAX] isEqualToNumber:[NSNumber numberWithUnsignedLongLong:ULLONG_MAX]], YES);
+	
+	XCTAssertEqual([[NSMutableNumber numberWithInt:1] isEqualToNumber:[NSMutableNumber numberWithInt:0]], NO);
+	XCTAssertEqual([[NSMutableNumber numberWithInt:0] isEqualToNumber:[NSMutableNumber numberWithInt:0]], YES);
+	XCTAssertEqual([[NSMutableNumber numberWithInt:52] isEqualToNumber:[NSMutableNumber numberWithInt:52]], YES);
+	XCTAssertEqual([[NSMutableNumber numberWithUnsignedLongLong:ULLONG_MAX] isEqualToNumber:[NSMutableNumber numberWithUnsignedLongLong:ULLONG_MAX]], YES);
 }
 
 - (void) testHash
@@ -295,7 +307,7 @@
 	
 	NSNumber *number = [unichar copy];
 	XCTAssertTrue([number isKindOfClass:NSNumber.class]);
-	XCTAssertFalse([number isKindOfClass:NSMutableNumber.class]);
+	XCTAssertTrue([number isKindOfClass:NSMutableNumber.class]);
 	XCTAssertEqual(number.unicharValue, 11);
 	
 	XCTAssertEqual([[NSMutableNumber numberWithChar: -1] copy].charValue, -1);
@@ -310,6 +322,14 @@
 	XCTAssertEqual([[NSMutableNumber numberWithUnsignedShort: 34000] copy].unsignedShortValue, 34000);
 	XCTAssertEqual([[NSMutableNumber numberWithUnsignedInt: 0xb0000000] copy].unsignedIntValue, 0xb0000000);
 	XCTAssertEqual([[NSMutableNumber numberWithLongLong: 0xc000000000000000] copy].unsignedLongLongValue, 0xc000000000000000);
+	
+	long n = 535353;
+	NSMutableNumber *mutableNumber =[NSMutableNumber numberWithLong:n];
+	XCTAssertEqualObjects([mutableNumber copy], [NSNumber numberWithLong:n]);
+	
+	mutableNumber = [NSMutableNumber numberWithLong:535353];
+	XCTAssertEqualObjects([mutableNumber copy], (NSNumber*)mutableNumber);
+	XCTAssertEqualObjects(mutableNumber, [mutableNumber copy]);
 }
 
 - (void)testNSMutableNumber_mutableCopyWithZone
@@ -321,6 +341,8 @@
 	NSMutableNumber *mutableNumber = [unichar mutableCopy];
 	XCTAssertTrue([mutableNumber isMemberOfClass:NSMutableNumber.class]);
 	XCTAssertEqual(mutableNumber.unicharValue, 11);
+	
+	XCTAssertEqualObjects(mutableNumber, unichar);
 }
 
 
@@ -1229,8 +1251,10 @@
 	NSMutableNumber *mutableNumber = [unichar mutableCopy];
 	XCTAssertTrue([mutableNumber isMemberOfClass:NSMutableNumber.class]);
 	XCTAssertEqual(unichar.unicharValue, 11);
+	
+	NSNumber *number = [NSNumber numberWithLong:535353];
+	XCTAssertEqualObjects([number mutableCopy], number);
 }
-
 
 - (void)testNSNumber_bitNot
 {

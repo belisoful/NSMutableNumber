@@ -48,14 +48,13 @@ pod 'NSMutableNumber'
 - Internal logic implemented with C++. Same performance as standard **NSNumber** (see time tests) and minimum amount of memory for storing values(used union's).
 - **NSNumber** can be compared with this class via additional number comparator method **isEqualToNumber:**
 - Category of the **NSNumber** with method **mutableCopy** which return **NSMutableNumber** class.
-- Adds NSMutableCopying for converting to a NSMutableNumber within NSNumber and NSMutableNumber 
-- Adds isNegativeOne, isZero, isOne, isTwo, isThree, isFour, isFive, isNAN, isInfinity, and isNegativeInfinity properties to NSNumber and NSMutableNumber
-- Adds "unichar" as a type to get for NSNumber and NSMutableNumber as well as to set for NSMutableNumber.
-- Adds bitNot property to NSNumber and NSMutableNumber for a bitwise NOT on the bits of an integer to return the respective class.
-- Adds bitNotValue property to NSNumber and NSMutableNumber for a bitwise NOT on the bits of an integer to return an unsigned long long.
-- Adds plusOne and subtractOne to return a new NSNumber or NSMutableNumber incremented or decremented.
-- Adds addOne and minusOne to incremented or decremented a NSMutableNumber.
-- Changes NSCopying.copyWithZone to return a NSNumber. The mutable copy is covered by NSMutableCopying.mutableCopyWithZone.
+- Adds NSMutableCopying to NSNumber for converting a NSNumber to a NSMutableNumber. 
+- isNegativeOne, isZero, isOne, isTwo, isThree, isFour, isFive, isNAN, isInfinity, and isNegativeInfinity properties to NSNumber and NSMutableNumber
+- "unicharValue" as a unit type for NSNumber and NSMutableNumber, and associated init and class methods.
+- bitNot property in NSNumber and NSMutableNumber for a bitwise NOT on the bits (of an integer).
+- bitNotValue property in NSNumber and NSMutableNumber for a bitwise NOT on the bits (of an integer); returns an unsigned long long.
+- plusOne and subtractOne property in NSNumber or NSMutableNumber for incrementing or decrementing.
+- addOne and minusOne within NSMutableNumber for incrementing or decrementing.
 - Enables support for NSSecureCoding.
 - Lots of unit tests to ensure proper functionality.
 

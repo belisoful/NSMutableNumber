@@ -344,15 +344,15 @@
 
 
 /**
- @brief Creates immutable copy of the number.
- Result class type is @b NSNumber object.
+ @brief Creates a mutable copy of the number.
+ Result class type is @b NSMutableNumber object.
  */
-- (nonnull NSNumber *) mutableCopy;
+- (nonnull NSMutableNumber *) mutableCopy;
 
 
 /**
  @brief Creates a mutable copy of the number.
- Result class type is @b NSNumber object.
+ Result class type is @b NSMutableNumber object.
  */
 - (nonnull NSMutableNumber *) mutableCopyWithZone:(nullable NSZone *) zone;
 

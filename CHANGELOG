@@ -1,9 +1,8 @@
 Changes on version 1.2.1 (current):
-- NSCopying returns NSNumber rather than NSMutableNumber; aligned with other classes and their mutable variants (such as NSString and NSMutableString).
 - Adds bitNot to NSNumber and NSMutableNumber for returning the bitNot number.
 - Adds bitNotValue (as an unsigned long long) to NSNumber and NSMutableNumber.
 - Adds plusOne and subtractOne to return their respective classes NSNumber and NSMutableNumber adding and subtracting 1.
-- Adds addOne and minusOne to increment and decrement a NSMutableNumber.
+- Adds addOne and minusOne to NSMutableNumber for incrementing and decrementing.
 - Adds isNegativeOne, isZero, isOne, isTwo, isThree, isFour, isFive, isNAN, isInfinity, and isNegativeInfinity properties to NSNumber and NSMutableNumber.
 - Adds unichar type support to NSNumber and NSMutableNumber.  "unicharValue" is a new type that is returned; setable in NSMutableNumber. (Unichar is unsigned short).
 - Enables support for NSSecureCoding.
