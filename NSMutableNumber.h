@@ -19,6 +19,10 @@
  *   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *   THE SOFTWARE.
  */
+/*
+ *   Updated 2025 by belisoful <belisoful@icloud.com> for new functionality
+ *   and conformance.
+ */
 
 
 #import <Foundation/Foundation.h>
@@ -26,7 +30,7 @@
 
 /**
  @brief Mutable version of the NSNumber.
- @detailed 
+ @detailed
  <li> This class inherits all @b NSNumber protocols and overrides required methods for duplicate @b NSNumber read functionality.
  @code
 	NSNumber * number = (NSNumber *)[[NSMutableNumber alloc] initWithInt:0];
@@ -117,6 +121,12 @@
 
 
 /**
+ @brief Initialize number object with unichar value.
+ */
+- (nonnull NSMutableNumber *) initWithUnichar:(unichar) value;
+
+
+/**
  @brief Initialize number object with int value.
  */
 - (nonnull NSMutableNumber *) initWithInt:(int) value;
@@ -204,6 +214,12 @@
  @brief Thread safe getter and setter for the value casted to unsigned short type.
  */
 @property (atomic, assign, readwrite) unsigned short unsignedShortValue;
+
+
+/**
+ @brief Thread safe getter and setter for the value casted to unichar type.
+ */
+@property (atomic, assign, readwrite) unichar unicharValue;
 
 
 /**
@@ -317,7 +333,133 @@
  @brief Creates immutable copy of the number.
  Result class type is @b NSNumber object.
  */
+- (nonnull NSNumber *) copy;
+
+
+/**
+ @brief Creates an immutable copy of the number.
+ Result class type is @b NSNumber object.
+ */
+- (nonnull NSNumber *) copyWithZone:(nullable NSZone *) zone;
+
+
+/**
+ @brief Creates immutable copy of the number.
+ Result class type is @b NSNumber object.
+ */
+- (nonnull NSNumber *) mutableCopy;
+
+
+/**
+ @brief Creates a mutable copy of the number.
+ Result class type is @b NSNumber object.
+ */
+- (nonnull NSMutableNumber *) mutableCopyWithZone:(nullable NSZone *) zone;
+
+
+/**
+ @brief Creates immutable copy of the number.
+ Result class type is @b NSNumber object.
+ */
 - (nonnull NSNumber *) immutableCopy;
+
+
+/**
+ @brief Thread save  bitwise NOT NSMutableNumber.
+ */
+@property (readonly) NSMutableNumber * _Nonnull bitNot;
+
+
+/**
+ @brief Thread safe bitwise NOT unsigned long long value.
+ */
+@property (nonatomic, assign, readwrite) unsigned long long bitNotValue;
+
+
+/**
+ @brief Adds 1 to the NSMutableNumber as a new number.
+ */
+@property (readonly) NSMutableNumber * _Nonnull plusOne;
+
+
+/**
+ @brief Subtracts 1 from the NSMutableNumber as a new number.
+ */
+@property (readonly) NSMutableNumber * _Nonnull subtractOne;
+
+
+/**
+ @brief Adds 1 to the NSMutableNumber.
+ @return Returns self for chaining.
+ */
+- (nonnull NSMutableNumber *) addOne;
+
+
+/**
+ @brief Subtracts 1 from the NSMutableNumber.
+ @return Returns self for chaining.
+ */
+- (nonnull NSMutableNumber *) minusOne;
+
+
+/**
+ @brief Compares the number to -1.
+ */
+@property(readonly) BOOL isNegativeOne;
+
+
+/**
+ @brief Compares the number to 0.
+ */
+@property(readonly) BOOL isZero;
+
+
+/**
+ @brief Compares the number to 1.
+ */
+@property(readonly) BOOL isOne;
+
+
+/**
+ @brief Compares the number to 2.
+ */
+@property(readonly) BOOL isTwo;
+
+
+/**
+ @brief Compares the number to 3.
+ */
+@property(readonly) BOOL isThree;
+
+
+/**
+ @brief Compares the number to 4.
+ */
+@property(readonly) BOOL isFour;
+
+
+/**
+ @brief Compares the number to 5.
+ */
+@property(readonly) BOOL isFive;
+
+
+/**
+ @brief Returns true if the number is Not A Number.
+ */
+@property(readonly) BOOL isNAN;
+
+
+/**
+ @brief Returns true if the number is positive Infinity.
+ */
+@property(readonly) BOOL isInfinity;
+
+
+/**
+ @brief Returns true if the number is negative Infinity.
+ */
+@property(readonly) BOOL isNegativeInfinity;
 
 @end
 
@@ -333,6 +475,7 @@
 + (nonnull NSMutableNumber *) numberWithUnsignedShort:(unsigned short) number;
 + (nonnull NSMutableNumber *) numberWithInt:(int) number;
 + (nonnull NSMutableNumber *) numberWithUnsignedInt:(unsigned int) number;
++ (nonnull NSMutableNumber *) numberWithUnichar:(unichar) number;
 + (nonnull NSMutableNumber *) numberWithLong:(long) number;
 + (nonnull NSMutableNumber *) numberWithUnsignedLong:(unsigned long) number;
 + (nonnull NSMutableNumber *) numberWithLongLong:(long long) number;
@@ -346,10 +489,109 @@
 @end
 
 
-@interface NSNumber(NSMutableNumberMutableCopy) <NSMutableCopying>
+@interface NSNumber(NSNumberAlignmentExtension) <NSMutableCopying>
+
++ (nonnull NSNumber *) numberWithUnichar:(unichar) number;
+
 
 /**
- @brief Number category with overrided @b mutableCopy method,
+ @brief Initialize number object with unichar.
+ */
+- (nullable id) initWithUnichar:(unichar) number;
+
+
+/**
+ @brief Thread safe getter and setter for the value casted to unichar.
+ */
+@property (readonly) unichar unicharValue;
+
+
+/**
+ @brief Thread safe bit NOT.
+ */
+@property (readonly) NSNumber * _Nonnull bitNot;
+
+
+/**
+ @brief Thread safe bit Not long long value.
+ */
+@property (atomic, assign, readonly) unsigned long long bitNotValue;
+
+
+/**
+ @brief Adds 1 to the NSNumber.
+ */
+@property (readonly) NSNumber * _Nonnull plusOne;
+
+
+/**
+ @brief Subtracts 1 from the NSNumber.
+ */
+@property (readonly) NSNumber * _Nonnull subtractOne;
+
+
+/**
+ @brief Compares the number to -1.
+ */
+@property(readonly) BOOL isNegativeOne;
+
+
+/**
+ @brief Compares the number to 0.
+ */
+@property(readonly) BOOL isZero;
+
+
+/**
+ @brief Compares the number to 1.
+ */
+@property(readonly) BOOL isOne;
+
+
+/**
+ @brief Compares the number to 2.
+ */
+@property(readonly) BOOL isTwo;
+
+
+/**
+ @brief Compares the number to 3.
+ */
+@property(readonly) BOOL isThree;
+
+
+/**
+ @brief Compares the number to 4.
+ */
+@property(readonly) BOOL isFour;
+
+
+/**
+ @brief Compares the number to 5.
+ */
+@property(readonly) BOOL isFive;
+
+
+/**
+ @brief Returns true if the number is Not A Number.
+ */
+@property(readonly) BOOL isNAN;
+
+
+/**
+ @brief Returns true if the number is positive Infinity.
+ */
+@property(readonly) BOOL isInfinity;
+
+
+/**
+ @brief Returns true if the number is negative Infinity.
+ */
+@property(readonly) BOOL isNegativeInfinity;
+
+
+/**
+ @brief Number category with overrided @b mutableCopyWithZone method,
  which returns @b NSMutableNumber object.
  */
 

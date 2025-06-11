@@ -7,7 +7,7 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" == "master" ]; th
     
     cd tests
     
-    jazzy --objc --clean --umbrella-header ../NSMutableNumber.h --framework-root . --module-version 1.1.4 --author "Oleh Kulykov" --author_url http://www.resident.name --github_url https://github.com/belisoful/NSMutableNumber --module NSMutableNumber --root-url http://belisoful.github.io/NSMutableNumber --theme apple --min-acl public --readme ../README.md
+    jazzy --objc --clean --umbrella-header ../NSMutableNumber.h --framework-root . --module-version 1.2.1 --author "Oleh Kulykov" --author_url http://www.resident.name --github_url https://github.com/belisoful/NSMutableNumber --module NSMutableNumber --root-url http://belisoful.github.io/NSMutableNumber --theme apple --min-acl public --readme ../README.md
 
     pushd docs
 
