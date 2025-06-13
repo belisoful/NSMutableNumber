@@ -193,6 +193,18 @@
 	XCTAssertEqual([number unsignedIntegerValue], 0);
 	XCTAssertEqual([[number stringValue] isEqualToString:@"0"], YES);
 }
+- (void)testBEMutableNumber_InitWithCoder
+{
+	NSMutableNumber	*reference = [NSMutableNumber numberWithDouble:M_PI];
+	XCTAssertTrue([NSMutableNumber supportsSecureCoding]);
+	
+	NSData *archivedData = [NSKeyedArchiver archivedDataWithRootObject:reference requiringSecureCoding:YES error:nil];
+	XCTAssertNotNil(archivedData);
+	NSMutableNumber *result = [NSKeyedUnarchiver unarchivedObjectOfClass:NSMutableNumber.class fromData:archivedData error:nil];
+	
+	XCTAssertNotNil(result);
+	XCTAssertTrue([result isEqual:reference]);
+}
 
 - (void) testIsKindOfClass
 {
@@ -222,7 +234,7 @@
 	XCTAssertEqual([[NSMutableNumber numberWithUnsignedLongLong:ULLONG_MAX] isEqualToNumber:[NSMutableNumber numberWithUnsignedLongLong:ULLONG_MAX]], YES);
 }
 
-- (void) testHash
+- (void) testNSMutableNumber_Hash
 {
 	XCTAssertEqual([[NSNumber numberWithBool:YES] hash], [[NSMutableNumber numberWithBool:YES] hash]);
 	XCTAssertEqual([[NSNumber numberWithBool:NO] hash], [[NSMutableNumber numberWithBool:NO] hash]);
