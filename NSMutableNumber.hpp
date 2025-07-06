@@ -43,8 +43,6 @@
 #define NSMNumberCType_float 11
 #define NSMNumberCType_double 12
 #define NSMNumberCType_BOOL 13
-#define NSMNumberCType_NSInteger 14
-#define NSMNumberCType_NSUInteger 15
 
 FOUNDATION_STATIC_INLINE NSUInteger NSMNumberCTypeFromEncoded(const char * type) {
 	const NSUInteger t = *(const uint16_t*)type; /// can't hardcode @encode result, just use in runtime.
@@ -53,8 +51,6 @@ FOUNDATION_STATIC_INLINE NSUInteger NSMNumberCTypeFromEncoded(const char * type)
 	else if (t == *(const uint16_t*)@encode(double)) return NSMNumberCType_double;
 	else if (t == *(const uint16_t*)@encode(float)) return NSMNumberCType_float;
 	else if (t == *(const uint16_t*)@encode(char)) return NSMNumberCType_char;
-	else if (t == *(const uint16_t*)@encode(NSInteger)) return NSMNumberCType_NSInteger;
-	else if (t == *(const uint16_t*)@encode(NSUInteger)) return NSMNumberCType_NSUInteger;
 	else if (t == *(const uint16_t*)@encode(long long)) return NSMNumberCType_long_long;
 	else if (t == *(const uint16_t*)@encode(unsigned long long)) return NSMNumberCType_unsigned_long_long;
 	else if (t == *(const uint16_t*)@encode(unsigned char)) return NSMNumberCType_unsigned_char;
@@ -69,11 +65,24 @@ FOUNDATION_STATIC_INLINE NSUInteger NSMNumberCTypeFromEncoded(const char * type)
 FOUNDATION_STATIC_INLINE NSUInteger NSMNumberCTypeIsUnsigned(const NSUInteger type) {
 	switch (type) {
 		case NSMNumberCType_unsigned_long_long:
+		case NSMNumberCType_unsigned_int:
 		case NSMNumberCType_unsigned_char:
 		case NSMNumberCType_unsigned_short:
-		case NSMNumberCType_unsigned_int:
 		case NSMNumberCType_unsigned_long:
-		case NSMNumberCType_NSUInteger:
+			return 1;
+			break;
+		default: break;
+	}
+	return 0;
+}
+
+FOUNDATION_STATIC_INLINE NSUInteger NSMNumberCTypeIsSigned(const NSUInteger type) {
+	switch (type) {
+		case NSMNumberCType_long_long:
+		case NSMNumberCType_int:
+		case NSMNumberCType_char:
+		case NSMNumberCType_short:
+		case NSMNumberCType_long:
 			return 1;
 			break;
 		default: break;
@@ -93,6 +102,9 @@ FOUNDATION_STATIC_INLINE NSUInteger NSMNumberCTypeIsReal(const NSUInteger type) 
 }
 
 class NSMPCNumber {
+protected:
+	pthread_mutex_t _mutex;
+	
 public:
 	union { // data
 		double r;
@@ -122,7 +134,6 @@ public:
 		number->serviceInfo = serviceInfo;
 	}
 
-	pthread_mutex_t _mutex;
 	
 	void lock() {
 		pthread_mutex_lock(&_mutex);
@@ -223,6 +234,10 @@ public:
 	BOOL isUnsigned() const {
 		return (reserved[1] == NSMNumberValueTypeU);
 	}
+	
+	BOOL isSigned() const {
+		return (reserved[1] == NSMNumberValueTypeI);
+	}
 
 	BOOL isReal() const {
 		return (reserved[1] == NSMNumberValueTypeR);
@@ -235,8 +250,6 @@ public:
 			case NSMNumberCType_double: this->set<double>(*(const double*)value, NSMNumberValueTypeR); break;
 			case NSMNumberCType_float: this->set<float>(*(const float*)value, NSMNumberValueTypeR); break;
 			case NSMNumberCType_BOOL: this->set<char>((*(const BOOL*)value) ? (char)1 : (char)0, NSMNumberValueTypeI); break;
-			case NSMNumberCType_NSInteger: this->set<NSInteger>(*(const NSInteger*)value, NSMNumberValueTypeI); break;
-			case NSMNumberCType_NSUInteger: this->set<NSUInteger>(*(const NSUInteger*)value, NSMNumberValueTypeU); break;
 			case NSMNumberCType_long_long: this->set<long long>(*(const long long*)value, NSMNumberValueTypeI); break;
 			case NSMNumberCType_unsigned_long_long: this->set<unsigned long long>(*(const unsigned long long*)value, NSMNumberValueTypeU); break;
 			case NSMNumberCType_unsigned_char: this->set<unsigned char>(*(const unsigned char*)value, NSMNumberValueTypeU); break;

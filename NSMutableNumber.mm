@@ -83,7 +83,15 @@
 		memcpy(buff, &_number.data, size1);
 		memcpy(&buff[size1], &_number.serviceInfo, size2);
 		_number.unlock();
-		[coder encodeBytes:buff length:size1 + size2 forKey:@"b"];
+		
+		// Check if this is a keyed archiver (NSKeyedArchiver) or non-keyed archiver (NSArchiver)
+		if ([coder allowsKeyedCoding]) {
+			// Keyed archiving (NSKeyedArchiver)
+			[coder encodeBytes:buff length:size1 + size2 forKey:@"b"];
+		} else {
+			// Non-keyed archiving (NSArchiver)
+			[coder encodeBytes:buff length:size1 + size2];
+		}
 	}
 }
 
@@ -114,7 +122,17 @@
 			const size_t size1 = sizeof(_number.data);
 			const size_t size2 = sizeof(_number.serviceInfo);
 			NSUInteger len = 0;
-			const uint8_t * bytes = [decoder decodeBytesForKey:@"b" returnedLength:&len];
+			const uint8_t * bytes = nil;
+			
+			// Check if this is a keyed archiver or non-keyed archiver
+			if ([decoder allowsKeyedCoding]) {
+				// Keyed archiving (NSKeyedUnarchiver)
+				bytes = [decoder decodeBytesForKey:@"b" returnedLength:&len];
+			} else {
+				// Non-keyed archiving (NSUnarchiver)
+				bytes = (const uint8_t *)[decoder decodeBytesWithReturnedLength:&len];
+			}
+			
 			if (bytes && len == (size1 + size2)) {
 				memcpy(&_number.data, bytes, size1);
 				memcpy(&_number.serviceInfo, &bytes[size1], size2);
@@ -307,6 +325,18 @@
 - (BOOL)isZero
 {
 	return [self compare:@0] == NSOrderedSame;
+}
+
+- (BOOL)isPositiveZero
+{
+	double value = self.doubleValue;
+	return value == 0.0 && !signbit(value);
+}
+
+- (BOOL)isNegativeZero
+{
+	double value = self.doubleValue;
+	return value == 0.0 && signbit(value);
 }
 
 - (BOOL)isOne
@@ -587,37 +617,62 @@
 	if (_number.isUnsigned()) {
 		if (right < 0) return NSOrderedDescending; // right is negative, while self is positive
 		const unsigned long long left = _number.get<unsigned long long>();
-		if (left == right) return NSOrderedSame;
+		if (left > right) return NSOrderedDescending;
 		else if (left < right) return NSOrderedAscending;
+	} else if (_number.isReal()) {
+		const double left = _number.get<double>();
+		if (left > right) return NSOrderedDescending;
+		else if (left < right) return NSOrderedAscending;
+		else if (isnan(left)) {
+			if (right >= 0) return NSOrderedAscending;
+			return NSOrderedDescending;
+		}
 	} else {
 		const long long left = _number.get<long long>();
-		if (left == right) return NSOrderedSame;
+		if (left > right) return NSOrderedDescending;
 		else if (left < right) return NSOrderedAscending;
 	}
-	return NSOrderedDescending;
+	return NSOrderedSame;
 }
 
 - (NSComparisonResult) compareWithUnsigned:(nullable id) otherNumber {
-	const unsigned long long right = [otherNumber unsignedLongLongValue];
 	if (_number.isUnsigned()) {
 		const unsigned long long left = _number.get<unsigned long long>();
-		if (left == right) return NSOrderedSame;
+		const unsigned long long right = [otherNumber unsignedLongLongValue];
+		if (left > right) return NSOrderedDescending;
 		else if (left < right) return NSOrderedAscending;
+	} else if (_number.isReal()) {
+		const double left = _number.get<double>();
+		const unsigned long long right = [otherNumber unsignedLongLongValue];
+		if (left > right) return NSOrderedDescending;
+		else if (left < right) return NSOrderedAscending;
+		else if (isnan(left)) return NSOrderedAscending;
 	} else {
 		const long long left = _number.get<long long>();
-		if (left < 0) return NSOrderedAscending; // self is negative, while right is positive
-		if (right == left) return NSOrderedSame;
-		else if (right > left) return NSOrderedAscending;
+		if (left < 0) return NSOrderedAscending;
+		const unsigned long long right = [otherNumber unsignedLongLongValue];
+		if (left < right) return NSOrderedAscending;
+		else if (left > right) return NSOrderedDescending;
 	}
-	return NSOrderedDescending;
+	return NSOrderedSame;
 }
 
 - (NSComparisonResult) compareWithReal:(nullable id) otherNumber {
 	const double left = _number.get<double>();
 	const double right = [otherNumber doubleValue];
-	if (left == right) return NSOrderedSame;
-	else if (left < right) return NSOrderedAscending;
-	return NSOrderedDescending;
+	if (left > right) {
+		return NSOrderedDescending;
+	} else if (left < right) {
+		return NSOrderedAscending;
+	} else if (isnan(right)) {
+		if (isnan(left)) return NSOrderedSame;
+		else if (signbit(left)) return NSOrderedAscending;
+		return NSOrderedDescending;
+	} else if (isnan(left)) {
+		if (signbit(right)) return NSOrderedDescending;
+		return NSOrderedAscending;
+	}
+	return NSOrderedSame;
 }
 
 - (NSComparisonResult) compare:(nullable id) object {
@@ -662,6 +717,13 @@
 #pragma mark - NSMutableNumber static initializers
 @implementation NSMutableNumber (NSMutableNumberCreation)
 
+
++ (nonnull NSMutableNumber *)infinity { return [[NSMutableNumber alloc] initWithDouble:INFINITY]; }
++ (nonnull NSMutableNumber *)minusInfinity { return [[NSMutableNumber alloc] initWithDouble:-INFINITY]; }
++ (nonnull NSMutableNumber *)NaN { return [[NSMutableNumber alloc] initWithDouble:NAN]; }
++ (nonnull NSMutableNumber *)zero { return [[NSMutableNumber alloc] initWithLongLong:0]; }
++ (nonnull NSMutableNumber *)negativeZero { return [[NSMutableNumber alloc] initWithDouble:-0.0]; }
+
 + (nonnull NSMutableNumber *) numberWithChar:(char) number { return [[NSMutableNumber alloc] initWithChar:number]; }
 + (nonnull NSMutableNumber *) numberWithUnsignedChar:(unsigned char) number { return [[NSMutableNumber alloc] initWithUnsignedChar:number]; }
 + (nonnull NSMutableNumber *) numberWithShort:(short) number { return [[NSMutableNumber alloc] initWithShort:number]; }
@@ -686,29 +748,24 @@
 
 - (BOOL)isNegativeOne
 {
-	switch (NSMNumberCTypeFromEncoded([self objCType])) {
-		case NSMNumberCType_BOOL: return !self.boolValue;
-		case NSMNumberCType_double: return self.doubleValue == -1.0;
-		case NSMNumberCType_float: return self.floatValue == -1.0;
-		case NSMNumberCType_char: return self.charValue == -1;
-		case NSMNumberCType_unsigned_char: return self.unsignedCharValue == ((unsigned char) -1);
-		case NSMNumberCType_short: return self.shortValue == -1;
-		case NSMNumberCType_unsigned_short: return self.unsignedShortValue == ((unsigned short) -1);
-		case NSMNumberCType_int: return self.intValue == -1;
-		case NSMNumberCType_unsigned_int: return self.unsignedIntValue == ((unsigned int) -1);
-		case NSMNumberCType_NSInteger: return self.integerValue == -1;
-		case NSMNumberCType_NSUInteger: return NO;
-		case NSMNumberCType_long: return self.longValue == -1;
-		case NSMNumberCType_unsigned_long: return self.unsignedLongValue == ((unsigned long) -1);
-		case NSMNumberCType_long_long: return self.longLongValue == -1;
-		case NSMNumberCType_unsigned_long_long: return self.unsignedLongLongValue == ((unsigned long long) -1);
-	}
-	return NO;
+	return [self compare:@-1] == NSOrderedSame;
 }
 
 - (BOOL)isZero
 {
 	return [self compare:@0] == NSOrderedSame;
+}
+
+- (BOOL)isPositiveZero
+{
+	double value = self.doubleValue;
+	return value == 0.0 && !signbit(value);
+}
+
+- (BOOL)isNegativeZero
+{
+	double value = self.doubleValue;
+	return value == 0.0 && signbit(value);
 }
 
 - (BOOL)isOne
@@ -749,6 +806,31 @@
 - (BOOL)isNegativeInfinity
 {
 	return [self compare:@(-INFINITY)] == NSOrderedSame;
+}
+
++ (NSNumber *)infinity
+{
+	return @(INFINITY);
+}
+
++ (NSNumber *)minusInfinity
+{
+	return @(-INFINITY);
+}
+
++ (NSNumber *)NaN
+{
+	return @(NAN);
+}
+
++ (NSNumber *)zero
+{
+	return @(0);
+}
+
++ (NSNumber *)negativeZero
+{
+	return @(-0.0);
 }
 
 
@@ -809,8 +891,6 @@
 		case NSMNumberCType_unsigned_short: bitNot = ~self.unsignedShortValue; break;
 		case NSMNumberCType_int: bitNot = ~self.intValue; break;
 		case NSMNumberCType_unsigned_int: bitNot = ~self.unsignedIntValue; break;
-		case NSMNumberCType_NSInteger: bitNot = ~self.integerValue; break;
-		case NSMNumberCType_NSUInteger: bitNot = ~self.unsignedIntegerValue; break;
 		case NSMNumberCType_long: bitNot = ~self.longValue; break;
 		case NSMNumberCType_unsigned_long: bitNot = ~self.unsignedLongValue; break;
 		case NSMNumberCType_long_long: bitNot = ~self.longLongValue; break;

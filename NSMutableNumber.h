@@ -193,6 +193,33 @@
 
 
 /**
+ @brief Thread safe INFINITY.
+ */
+@property (class, readonly) NSMutableNumber * _Nonnull infinity;
+
+/**
+ @brief Thread safe -INFINITY.  `negativeInfinity` is already used as a define
+ */
+@property (class, readonly) NSMutableNumber * _Nonnull minusInfinity;
+
+/**
+ @brief Thread safe NaN.
+ */
+@property (class, readonly) NSMutableNumber * _Nonnull NaN;
+
+/**
+ @brief Thread safe zero.
+ */
+@property (class, readonly) NSMutableNumber * _Nonnull zero;
+
+/**
+ @brief Thread safe negative zero as a double.
+ */
+@property (class, readonly) NSMutableNumber * _Nonnull negativeZero;
+
+
+
+/**
  @brief Thread safe getter and setter for the value casted to char type.
  */
 @property (atomic, assign, readwrite) char charValue;
@@ -415,6 +442,18 @@
 
 
 /**
+ @brief Compares the number to 0.
+ */
+@property(readonly) BOOL isPositiveZero;
+
+
+/**
+ @brief Compares the number to -0.0.
+ */
+@property(readonly) BOOL isNegativeZero;
+
+
+/**
  @brief Compares the number to 1.
  */
 @property(readonly) BOOL isOne;
@@ -489,8 +528,39 @@
 @end
 
 
+
+
 @interface NSNumber(NSNumberAlignmentExtension) <NSMutableCopying>
 
+/**
+ @brief Thread safe INFINITY.
+ */
+@property (class, readonly) NSNumber * _Nonnull infinity;
+
+/**
+ @brief Thread safe -INFINITY.  negativeInfinite is already taken.
+ */
+@property (class, readonly) NSNumber * _Nonnull minusInfinity;
+
+/**
+ @brief Thread safe NaN.
+ */
+@property (class, readonly) NSNumber * _Nonnull NaN;
+
+/**
+ @brief Thread safe zero.
+ */
+@property (class, readonly) NSNumber * _Nonnull zero;
+
+/**
+ @brief Thread safe zero.
+ */
+@property (class, readonly) NSNumber * _Nonnull negativeZero;
+
+
+/**
+ @brief new number object with unichar.
+ */
 + (nonnull NSNumber *) numberWithUnichar:(unichar) number;
 
 
@@ -540,6 +610,18 @@
  @brief Compares the number to 0.
  */
 @property(readonly) BOOL isZero;
+
+
+/**
+ @brief Compares the number to 0.
+ */
+@property(readonly) BOOL isPositiveZero;
+
+
+/**
+ @brief Compares the number to -0.0.
+ */
+@property(readonly) BOOL isNegativeZero;
 
 
 /**

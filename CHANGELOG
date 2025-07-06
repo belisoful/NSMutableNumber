@@ -1,4 +1,13 @@
-Changes on version 1.2.1 (current):
+Changes on version 1.2.2 (current):
+- Better `compare:` method to replicate output of NSNumber, especially around NaN.
+- NSCoder support for older non-keyed coding (for older versions of Apple OSes).
+- Properties to construct special numbers: infinity, negative Infinity (minusInfinity), NaN, zero, and negative Zero (-0.0 double).
+- Better isNegativeOne
+- Adds isPositiveZero and isNegativeZero for real numbers.
+- Greater unit test coverage
+- NSMockNumber to test different data types that aren't used by NSNumber.
+
+Changes on version 1.2.1:
 - Adds bitNot to NSNumber and NSMutableNumber for returning the bitNot number.
 - Adds bitNotValue (as an unsigned long long) to NSNumber and NSMutableNumber.
 - Adds plusOne and subtractOne to return their respective classes NSNumber and NSMutableNumber adding and subtracting 1.

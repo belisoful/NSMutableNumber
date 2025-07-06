@@ -5,7 +5,7 @@
 [![OnlineDocumentation Status](https://img.shields.io/badge/online%20documentation-generated-brightgreen.svg)](http://cocoadocs.org/docsets/NSMutableNumber)
 
 
-# NSMutableNumber 1.2.1 (2025)
+# NSMutableNumber 1.2.2 (2025)
 NSMutableNumber - full thread safe mutable NSNumber implementation with NSNumber extensions.
 
 
@@ -19,13 +19,14 @@ pod 'NSMutableNumber'
 - This class inherits all **NSNumber** protocols and overrides required methods for duplicate **NSNumber** read functionality.
 ```objc
 	NSNumber * number = (NSNumber *)[[NSMutableNumber alloc] initWithInt:0];
-	// use actual number NSMutableNumber class as NSNumber, of couce read only
+	// use actual number NSMutableNumber class as NSNumber, of course read only
 ```
 - All getters are thread safe. Can be used for cross-thread synchronization. Used recursive mutex for get/set values.
 - Same hash method as on **NSNumber** object - required for using as key with key/value coding classes.
 - Detected as kind of **NSNumber** or **NSValue** class.
 ```objc
 	NSMutableNumber * mutableNumber = [[NSMutableNumber alloc] init];
+	[mutableNumber isKindOfClass:[NSValue class]]; // YES, is kind of class
 	[mutableNumber isKindOfClass:[NSNumber class]]; // YES, is kind of class
 	[mutableNumber isKindOfClass:[NSMutableNumber class]]; // YES, is kind of class
 ```
@@ -45,17 +46,18 @@ pod 'NSMutableNumber'
 	[[NSMutableNumber numberWithUnsignedInteger:NSUIntegerMax] isEqual:[NSNumber numberWithUnsignedInteger:NSUIntegerMax]]; // YES, equal
 	[[NSMutableNumber numberWithUnsignedLongLong:ULONG_LONG_MAX] isEqual:[NSNumber numberWithUnsignedLongLong:ULONG_LONG_MAX]]; // YES, equal
 ```
+- "compare:" compatible with **NSNumber**, including special cases like NAN and -0.0.
 - Internal logic implemented with C++. Same performance as standard **NSNumber** (see time tests) and minimum amount of memory for storing values(used union's).
 - **NSNumber** can be compared with this class via additional number comparator method **isEqualToNumber:**
 - Category of the **NSNumber** with method **mutableCopy** which return **NSMutableNumber** class.
 - Adds NSMutableCopying to NSNumber for converting a NSNumber to a NSMutableNumber. 
-- isNegativeOne, isZero, isOne, isTwo, isThree, isFour, isFive, isNAN, isInfinity, and isNegativeInfinity properties to NSNumber and NSMutableNumber
+- isNegativeOne, isZero, isPositiveZero, isNegativeZero, isOne, isTwo, isThree, isFour, isFive, isNAN, isInfinity, and isNegativeInfinity properties to NSNumber and NSMutableNumber
 - "unicharValue" as a unit type for NSNumber and NSMutableNumber, and associated init and class methods.
 - bitNot property in NSNumber and NSMutableNumber for a bitwise NOT on the bits (of an integer).
 - bitNotValue property in NSNumber and NSMutableNumber for a bitwise NOT on the bits (of an integer); returns an unsigned long long.
 - plusOne and subtractOne property in NSNumber or NSMutableNumber for incrementing or decrementing.
 - addOne and minusOne within NSMutableNumber for incrementing or decrementing.
-- Enables support for NSSecureCoding.
+- Enables support for NSSecureCoding and backward compatible with non-keyed coding (on older OS versions)
 - Lots of unit tests to ensure proper functionality.
 
 # License
