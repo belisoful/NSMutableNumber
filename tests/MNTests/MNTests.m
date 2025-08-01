@@ -563,7 +563,7 @@
 - (void)testNSMutableNumber_notANumber
 {
 	XCTAssertEqualObjects(NSMutableNumber.notANumber, @(NAN));
-	XCTAssertTrue(NSMutableNumber.notANumber.isNAN);
+	XCTAssertTrue(NSMutableNumber.notANumber.isNotANumber);
 }
 
 - (void)testNSMutableNumber_zero
@@ -580,6 +580,12 @@
 	XCTAssertFalse(NSMutableNumber.negativeZero.isPositiveZero);
 	XCTAssertTrue(NSMutableNumber.negativeZero.isZero);
 	XCTAssertTrue(NSMutableNumber.negativeZero.isNegativeZero);
+}
+
+- (void)testNSMutableNumber_one
+{
+	XCTAssertEqualObjects(NSMutableNumber.one, @(1));
+	XCTAssertTrue(NSMutableNumber.one.isOne);
 }
 
 - (void) testNSMutableNumber_Descriptions
@@ -1167,6 +1173,8 @@
 	XCTAssertFalse([NSMutableNumber numberWithFloat:0].isOne);
 	XCTAssertTrue([NSMutableNumber numberWithDouble:1].isOne);
 	XCTAssertFalse([NSMutableNumber numberWithDouble:0].isOne);
+	
+	XCTAssertTrue(NSMutableNumber.one.isOne);
 }
 
 
@@ -1351,48 +1359,48 @@
 	XCTAssertFalse([NSMutableNumber numberWithDouble:0].isFive);
 }
 
-- (void)testNSMutableNumber_isNAN
+- (void)testNSMutableNumber_isNotANumber
 {
-	XCTAssertFalse([NSMutableNumber numberWithBool:NAN].isNAN);
-	XCTAssertFalse([NSMutableNumber numberWithBool:NO].isNAN);
+	XCTAssertFalse([NSMutableNumber numberWithBool:NAN].isNotANumber);
+	XCTAssertFalse([NSMutableNumber numberWithBool:NO].isNotANumber);
 	
-	XCTAssertFalse([NSMutableNumber numberWithChar:NAN].isNAN);
-	XCTAssertFalse([NSMutableNumber numberWithChar:0].isNAN);
-	XCTAssertFalse([NSMutableNumber numberWithUnsignedChar:NAN].isNAN);
-	XCTAssertFalse([NSMutableNumber numberWithUnsignedChar:0].isNAN);
+	XCTAssertFalse([NSMutableNumber numberWithChar:NAN].isNotANumber);
+	XCTAssertFalse([NSMutableNumber numberWithChar:0].isNotANumber);
+	XCTAssertFalse([NSMutableNumber numberWithUnsignedChar:NAN].isNotANumber);
+	XCTAssertFalse([NSMutableNumber numberWithUnsignedChar:0].isNotANumber);
 	
-	XCTAssertFalse([NSMutableNumber numberWithShort:NAN].isNAN);
-	XCTAssertFalse([NSMutableNumber numberWithShort:0].isNAN);
-	XCTAssertFalse([NSMutableNumber numberWithUnsignedShort:NAN].isNAN);
-	XCTAssertFalse([NSMutableNumber numberWithUnsignedShort:0].isNAN);
+	XCTAssertFalse([NSMutableNumber numberWithShort:NAN].isNotANumber);
+	XCTAssertFalse([NSMutableNumber numberWithShort:0].isNotANumber);
+	XCTAssertFalse([NSMutableNumber numberWithUnsignedShort:NAN].isNotANumber);
+	XCTAssertFalse([NSMutableNumber numberWithUnsignedShort:0].isNotANumber);
 	
-	XCTAssertFalse([NSMutableNumber numberWithUnichar:NAN].isNAN);
-	XCTAssertFalse([NSMutableNumber numberWithUnichar:0].isNAN);
+	XCTAssertFalse([NSMutableNumber numberWithUnichar:NAN].isNotANumber);
+	XCTAssertFalse([NSMutableNumber numberWithUnichar:0].isNotANumber);
 	
-	XCTAssertFalse([NSMutableNumber numberWithInt:NAN].isNAN);
-	XCTAssertFalse([NSMutableNumber numberWithInt:0].isNAN);
-	XCTAssertFalse([NSMutableNumber numberWithUnsignedInt:NAN].isNAN);
-	XCTAssertFalse([NSMutableNumber numberWithUnsignedInt:0].isNAN);
+	XCTAssertFalse([NSMutableNumber numberWithInt:NAN].isNotANumber);
+	XCTAssertFalse([NSMutableNumber numberWithInt:0].isNotANumber);
+	XCTAssertFalse([NSMutableNumber numberWithUnsignedInt:NAN].isNotANumber);
+	XCTAssertFalse([NSMutableNumber numberWithUnsignedInt:0].isNotANumber);
 	
-	XCTAssertFalse([NSMutableNumber numberWithInteger:NAN].isNAN);
-	XCTAssertFalse([NSMutableNumber numberWithInteger:0].isNAN);
-	XCTAssertFalse([NSMutableNumber numberWithUnsignedInteger:NAN].isNAN);
-	XCTAssertFalse([NSMutableNumber numberWithUnsignedInteger:0].isNAN);
+	XCTAssertFalse([NSMutableNumber numberWithInteger:NAN].isNotANumber);
+	XCTAssertFalse([NSMutableNumber numberWithInteger:0].isNotANumber);
+	XCTAssertFalse([NSMutableNumber numberWithUnsignedInteger:NAN].isNotANumber);
+	XCTAssertFalse([NSMutableNumber numberWithUnsignedInteger:0].isNotANumber);
 	
-	XCTAssertFalse([NSMutableNumber numberWithLong:NAN].isNAN);
-	XCTAssertFalse([NSMutableNumber numberWithLong:0].isNAN);
-	XCTAssertFalse([NSMutableNumber numberWithUnsignedLong:NAN].isNAN);
-	XCTAssertFalse([NSMutableNumber numberWithUnsignedLong:0].isNAN);
+	XCTAssertFalse([NSMutableNumber numberWithLong:NAN].isNotANumber);
+	XCTAssertFalse([NSMutableNumber numberWithLong:0].isNotANumber);
+	XCTAssertFalse([NSMutableNumber numberWithUnsignedLong:NAN].isNotANumber);
+	XCTAssertFalse([NSMutableNumber numberWithUnsignedLong:0].isNotANumber);
 	
-	XCTAssertFalse([NSMutableNumber numberWithLongLong:NAN].isNAN);
-	XCTAssertFalse([NSMutableNumber numberWithLongLong:0].isNAN);
-	XCTAssertFalse([NSMutableNumber numberWithUnsignedLongLong:NAN].isNAN);
-	XCTAssertFalse([NSMutableNumber numberWithUnsignedLongLong:0].isNAN);
+	XCTAssertFalse([NSMutableNumber numberWithLongLong:NAN].isNotANumber);
+	XCTAssertFalse([NSMutableNumber numberWithLongLong:0].isNotANumber);
+	XCTAssertFalse([NSMutableNumber numberWithUnsignedLongLong:NAN].isNotANumber);
+	XCTAssertFalse([NSMutableNumber numberWithUnsignedLongLong:0].isNotANumber);
 	
-	XCTAssertTrue([NSMutableNumber numberWithFloat:NAN].isNAN);
-	XCTAssertFalse([NSMutableNumber numberWithFloat:0].isNAN);
-	XCTAssertTrue([NSMutableNumber numberWithDouble:NAN].isNAN);
-	XCTAssertFalse([NSMutableNumber numberWithDouble:0].isNAN);
+	XCTAssertTrue([NSMutableNumber numberWithFloat:NAN].isNotANumber);
+	XCTAssertFalse([NSMutableNumber numberWithFloat:0].isNotANumber);
+	XCTAssertTrue([NSMutableNumber numberWithDouble:NAN].isNotANumber);
+	XCTAssertFalse([NSMutableNumber numberWithDouble:0].isNotANumber);
 }
 
 
@@ -1655,7 +1663,7 @@
 - (void)testNSNumber_notANumber
 {
 	XCTAssertEqualObjects(NSNumber.notANumber, @(NAN));
-	XCTAssertTrue(NSNumber.notANumber.isNAN);
+	XCTAssertTrue(NSNumber.notANumber.isNotANumber);
 }
 
 - (void)testNSNumber_zero
@@ -1672,6 +1680,12 @@
 	XCTAssertFalse(NSNumber.negativeZero.isPositiveZero);
 	XCTAssertTrue(NSNumber.negativeZero.isZero);
 	XCTAssertTrue(NSNumber.negativeZero.isNegativeZero);
+}
+
+- (void)testNSNumber_one
+{
+	XCTAssertEqualObjects(NSNumber.one, @(1));
+	XCTAssertTrue(NSNumber.one.isOne);
 }
 
 - (void)testNSNumber_unichar
@@ -2144,6 +2158,8 @@
 	XCTAssertFalse([NSNumber numberWithFloat:0].isOne);
 	XCTAssertTrue([NSNumber numberWithDouble:1].isOne);
 	XCTAssertFalse([NSNumber numberWithDouble:0].isOne);
+	
+	XCTAssertTrue(NSNumber.one.isOne);
 }
 
 
@@ -2328,48 +2344,48 @@
 	XCTAssertFalse([NSNumber numberWithDouble:0].isFive);
 }
 
-- (void)testNSNumber_isNAN
+- (void)testNSNumber_isNotANumber
 {
-	XCTAssertFalse([NSNumber numberWithBool:NAN].isNAN);
-	XCTAssertFalse([NSNumber numberWithBool:NO].isNAN);
+	XCTAssertFalse([NSNumber numberWithBool:NAN].isNotANumber);
+	XCTAssertFalse([NSNumber numberWithBool:NO].isNotANumber);
 	
-	XCTAssertFalse([NSNumber numberWithChar:NAN].isNAN);
-	XCTAssertFalse([NSNumber numberWithChar:0].isNAN);
-	XCTAssertFalse([NSNumber numberWithUnsignedChar:NAN].isNAN);
-	XCTAssertFalse([NSNumber numberWithUnsignedChar:0].isNAN);
+	XCTAssertFalse([NSNumber numberWithChar:NAN].isNotANumber);
+	XCTAssertFalse([NSNumber numberWithChar:0].isNotANumber);
+	XCTAssertFalse([NSNumber numberWithUnsignedChar:NAN].isNotANumber);
+	XCTAssertFalse([NSNumber numberWithUnsignedChar:0].isNotANumber);
 	
-	XCTAssertFalse([NSNumber numberWithShort:NAN].isNAN);
-	XCTAssertFalse([NSNumber numberWithShort:0].isNAN);
-	XCTAssertFalse([NSNumber numberWithUnsignedShort:NAN].isNAN);
-	XCTAssertFalse([NSNumber numberWithUnsignedShort:0].isNAN);
+	XCTAssertFalse([NSNumber numberWithShort:NAN].isNotANumber);
+	XCTAssertFalse([NSNumber numberWithShort:0].isNotANumber);
+	XCTAssertFalse([NSNumber numberWithUnsignedShort:NAN].isNotANumber);
+	XCTAssertFalse([NSNumber numberWithUnsignedShort:0].isNotANumber);
 	
-	XCTAssertFalse([NSNumber numberWithUnichar:NAN].isNAN);
-	XCTAssertFalse([NSNumber numberWithUnichar:0].isNAN);
+	XCTAssertFalse([NSNumber numberWithUnichar:NAN].isNotANumber);
+	XCTAssertFalse([NSNumber numberWithUnichar:0].isNotANumber);
 	
-	XCTAssertFalse([NSNumber numberWithInt:NAN].isNAN);
-	XCTAssertFalse([NSNumber numberWithInt:0].isNAN);
-	XCTAssertFalse([NSNumber numberWithUnsignedInt:NAN].isNAN);
-	XCTAssertFalse([NSNumber numberWithUnsignedInt:0].isNAN);
+	XCTAssertFalse([NSNumber numberWithInt:NAN].isNotANumber);
+	XCTAssertFalse([NSNumber numberWithInt:0].isNotANumber);
+	XCTAssertFalse([NSNumber numberWithUnsignedInt:NAN].isNotANumber);
+	XCTAssertFalse([NSNumber numberWithUnsignedInt:0].isNotANumber);
 	
-	XCTAssertFalse([NSNumber numberWithInteger:NAN].isNAN);
-	XCTAssertFalse([NSNumber numberWithInteger:0].isNAN);
-	XCTAssertFalse([NSNumber numberWithUnsignedInteger:NAN].isNAN);
-	XCTAssertFalse([NSNumber numberWithUnsignedInteger:0].isNAN);
+	XCTAssertFalse([NSNumber numberWithInteger:NAN].isNotANumber);
+	XCTAssertFalse([NSNumber numberWithInteger:0].isNotANumber);
+	XCTAssertFalse([NSNumber numberWithUnsignedInteger:NAN].isNotANumber);
+	XCTAssertFalse([NSNumber numberWithUnsignedInteger:0].isNotANumber);
 	
-	XCTAssertFalse([NSNumber numberWithLong:NAN].isNAN);
-	XCTAssertFalse([NSNumber numberWithLong:0].isNAN);
-	XCTAssertFalse([NSNumber numberWithUnsignedLong:NAN].isNAN);
-	XCTAssertFalse([NSNumber numberWithUnsignedLong:0].isNAN);
+	XCTAssertFalse([NSNumber numberWithLong:NAN].isNotANumber);
+	XCTAssertFalse([NSNumber numberWithLong:0].isNotANumber);
+	XCTAssertFalse([NSNumber numberWithUnsignedLong:NAN].isNotANumber);
+	XCTAssertFalse([NSNumber numberWithUnsignedLong:0].isNotANumber);
 	
-	XCTAssertFalse([NSNumber numberWithLongLong:NAN].isNAN);
-	XCTAssertFalse([NSNumber numberWithLongLong:0].isNAN);
-	XCTAssertFalse([NSNumber numberWithUnsignedLongLong:NAN].isNAN);
-	XCTAssertFalse([NSNumber numberWithUnsignedLongLong:0].isNAN);
+	XCTAssertFalse([NSNumber numberWithLongLong:NAN].isNotANumber);
+	XCTAssertFalse([NSNumber numberWithLongLong:0].isNotANumber);
+	XCTAssertFalse([NSNumber numberWithUnsignedLongLong:NAN].isNotANumber);
+	XCTAssertFalse([NSNumber numberWithUnsignedLongLong:0].isNotANumber);
 	
-	XCTAssertTrue([NSNumber numberWithFloat:NAN].isNAN);
-	XCTAssertFalse([NSNumber numberWithFloat:0].isNAN);
-	XCTAssertTrue([NSNumber numberWithDouble:NAN].isNAN);
-	XCTAssertFalse([NSNumber numberWithDouble:0].isNAN);
+	XCTAssertTrue([NSNumber numberWithFloat:NAN].isNotANumber);
+	XCTAssertFalse([NSNumber numberWithFloat:0].isNotANumber);
+	XCTAssertTrue([NSNumber numberWithDouble:NAN].isNotANumber);
+	XCTAssertFalse([NSNumber numberWithDouble:0].isNotANumber);
 }
 
 

@@ -217,6 +217,11 @@
  */
 @property (class, copy, readonly) NSMutableNumber * _Nonnull negativeZero;
 
+/**
+ @brief Thread safe one.
+ */
+@property (class, copy, readonly) NSMutableNumber * _Nonnull one;
+
 
 
 /**
@@ -486,7 +491,7 @@
 /**
  @brief Returns true if the number is Not A Number.
  */
-@property(readonly) BOOL isNAN;
+@property(readonly) BOOL isNotANumber;
 
 
 /**
@@ -556,6 +561,11 @@
  @brief Thread safe zero.
  */
 @property (class, copy, readonly) NSNumber * _Nonnull negativeZero;
+
+/**
+ @brief Thread safe one.
+ */
+@property (class, copy, readonly) NSNumber * _Nonnull one;
 
 
 /**
@@ -657,7 +667,7 @@
 /**
  @brief Returns true if the number is Not A Number.
  */
-@property(readonly) BOOL isNAN;
+@property(readonly) BOOL isNotANumber;
 
 
 /**

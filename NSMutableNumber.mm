@@ -364,7 +364,7 @@
 	return [self compare:@5] == NSOrderedSame;
 }
 
-- (BOOL)isNAN
+- (BOOL)isNotANumber
 {
 	return isnan(self.doubleValue);
 }
@@ -723,6 +723,7 @@
 + (nonnull NSMutableNumber *)notANumber { return [[NSMutableNumber alloc] initWithDouble:NAN]; }
 + (nonnull NSMutableNumber *)zero { return [[NSMutableNumber alloc] initWithLongLong:0]; }
 + (nonnull NSMutableNumber *)negativeZero { return [[NSMutableNumber alloc] initWithDouble:-0.0]; }
++ (nonnull NSMutableNumber *)one { return [[NSMutableNumber alloc] initWithLongLong:1]; }
 
 + (nonnull NSMutableNumber *) numberWithChar:(char) number { return [[NSMutableNumber alloc] initWithChar:number]; }
 + (nonnull NSMutableNumber *) numberWithUnsignedChar:(unsigned char) number { return [[NSMutableNumber alloc] initWithUnsignedChar:number]; }
@@ -793,7 +794,7 @@
 	return [self compare:@5] == NSOrderedSame;
 }
 
-- (BOOL)isNAN
+- (BOOL)isNotANumber
 {
 	return isnan(self.doubleValue);
 }
@@ -831,6 +832,11 @@
 + (NSNumber *)negativeZero
 {
 	return @(-0.0);
+}
+
++ (NSNumber *)one
+{
+	return @(1);
 }
 
 

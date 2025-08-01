@@ -5,7 +5,7 @@
 [![OnlineDocumentation Status](https://img.shields.io/badge/online%20documentation-generated-brightgreen.svg)](http://cocoadocs.org/docsets/NSMutableNumber)
 
 
-# NSMutableNumber 1.2.2 (2025)
+# NSMutableNumber 1.2.3 (August 2025)
 NSMutableNumber - full thread safe mutable NSNumber implementation with NSNumber extensions.
 
 
@@ -51,7 +51,8 @@ pod 'NSMutableNumber'
 - **NSNumber** can be compared with this class via additional number comparator method **isEqualToNumber:**
 - Category of the **NSNumber** with method **mutableCopy** which return **NSMutableNumber** class.
 - Adds NSMutableCopying to NSNumber for converting a NSNumber to a NSMutableNumber. 
-- isNegativeOne, isZero, isPositiveZero, isNegativeZero, isOne, isTwo, isThree, isFour, isFive, isNAN, isInfinity, and isNegativeInfinity properties to NSNumber and NSMutableNumber
+- Class numbers zero, negativeZero, one, notANumber, infinity, and minusInfinity for NSNumber and NSMutableNumber.
+- isNegativeOne, isZero, isPositiveZero, isNegativeZero, isOne, isTwo, isThree, isFour, isFive, isNotANumber, isInfinity, and isNegativeInfinity properties to NSNumber and NSMutableNumber.
 - "unicharValue" as a unit type for NSNumber and NSMutableNumber, and associated init and class methods.
 - bitNot property in NSNumber and NSMutableNumber for a bitwise NOT on the bits (of an integer).
 - bitNotValue property in NSNumber and NSMutableNumber for a bitwise NOT on the bits (of an integer); returns an unsigned long long.
