@@ -401,9 +401,9 @@
 	XCTAssertEqual([leftNumber compare:NSMutableNumber.infinity], NSOrderedAscending);
 	XCTAssertEqual([leftNumber compare:NSMutableNumber.minusInfinity], NSOrderedDescending);
 	
-	XCTAssertEqual([[NSMutableNumber numberWithInteger:1] compare:NSMutableNumber.NaN], NSOrderedDescending);
-	XCTAssertEqual([[NSMutableNumber numberWithInteger:0] compare:NSMutableNumber.NaN], NSOrderedDescending);
-	XCTAssertEqual([[NSMutableNumber numberWithInteger:-1] compare:NSMutableNumber.NaN], NSOrderedAscending);
+	XCTAssertEqual([[NSMutableNumber numberWithInteger:1] compare:NSMutableNumber.notANumber], NSOrderedDescending);
+	XCTAssertEqual([[NSMutableNumber numberWithInteger:0] compare:NSMutableNumber.notANumber], NSOrderedDescending);
+	XCTAssertEqual([[NSMutableNumber numberWithInteger:-1] compare:NSMutableNumber.notANumber], NSOrderedAscending);
 	
 	NSNumber *reference = [NSNumber numberWithInteger:10];
 	XCTAssertEqual([reference compare:@(INFINITY)], NSOrderedAscending);
@@ -464,11 +464,11 @@
 	
 	XCTAssertEqual([leftNumber compare:NSMutableNumber.infinity], NSOrderedAscending);
 	XCTAssertEqual([leftNumber compare:NSMutableNumber.minusInfinity], NSOrderedDescending);
-	XCTAssertEqual([leftNumber compare:NSMutableNumber.NaN], NSOrderedDescending);
+	XCTAssertEqual([leftNumber compare:NSMutableNumber.notANumber], NSOrderedDescending);
 	
-	XCTAssertEqual([[NSMutableNumber numberWithUnsignedInteger:0] compare:NSMutableNumber.NaN], NSOrderedDescending);
+	XCTAssertEqual([[NSMutableNumber numberWithUnsignedInteger:0] compare:NSMutableNumber.notANumber], NSOrderedDescending);
 	
-	XCTAssertEqual([[NSNumber numberWithUnsignedInteger:0] compare:NSNumber.NaN], NSOrderedDescending);
+	XCTAssertEqual([[NSNumber numberWithUnsignedInteger:0] compare:NSNumber.notANumber], NSOrderedDescending);
 	
 	
 	XCTAssertEqual([leftNumber compare:[NSMutableNumber numberWithInteger:-11]], NSOrderedDescending);
@@ -496,29 +496,29 @@
 	
 	XCTAssertEqual([leftNumber compare:NSMutableNumber.infinity], NSOrderedAscending);
 	XCTAssertEqual([leftNumber compare:NSMutableNumber.minusInfinity], NSOrderedDescending);
-	XCTAssertEqual([leftNumber compare:NSMutableNumber.NaN], NSOrderedDescending);
+	XCTAssertEqual([leftNumber compare:NSMutableNumber.notANumber], NSOrderedDescending);
 	
 	XCTAssertEqual([[NSMutableNumber numberWithDouble:INFINITY] compare:NSMutableNumber.infinity], NSOrderedSame);
 	XCTAssertEqual([[NSMutableNumber numberWithDouble:-INFINITY] compare:NSMutableNumber.minusInfinity], NSOrderedSame);
-	XCTAssertEqual([[NSMutableNumber numberWithDouble:NAN] compare:NSMutableNumber.NaN], NSOrderedSame);
+	XCTAssertEqual([[NSMutableNumber numberWithDouble:NAN] compare:NSMutableNumber.notANumber], NSOrderedSame);
 	
-	XCTAssertEqual([[NSMutableNumber numberWithDouble:0.1] compare:NSMutableNumber.NaN], NSOrderedDescending);
-	XCTAssertEqual([[NSMutableNumber numberWithDouble:0.0] compare:NSMutableNumber.NaN], NSOrderedDescending);
-	XCTAssertEqual([[NSMutableNumber numberWithDouble:-0.0] compare:NSMutableNumber.NaN], NSOrderedAscending);
-	XCTAssertEqual([[NSMutableNumber numberWithDouble:-0.1] compare:NSMutableNumber.NaN], NSOrderedAscending);
+	XCTAssertEqual([[NSMutableNumber numberWithDouble:0.1] compare:NSMutableNumber.notANumber], NSOrderedDescending);
+	XCTAssertEqual([[NSMutableNumber numberWithDouble:0.0] compare:NSMutableNumber.notANumber], NSOrderedDescending);
+	XCTAssertEqual([[NSMutableNumber numberWithDouble:-0.0] compare:NSMutableNumber.notANumber], NSOrderedAscending);
+	XCTAssertEqual([[NSMutableNumber numberWithDouble:-0.1] compare:NSMutableNumber.notANumber], NSOrderedAscending);
 	
-	XCTAssertEqual([NSMutableNumber.NaN compare:[NSMutableNumber numberWithDouble:0.1]], NSOrderedAscending);
-	XCTAssertEqual([NSMutableNumber.NaN compare:[NSMutableNumber numberWithDouble:0.0]], NSOrderedAscending);
-	XCTAssertEqual([NSMutableNumber.NaN compare:[NSMutableNumber numberWithDouble:-0.0]], NSOrderedDescending);
-	XCTAssertEqual([NSMutableNumber.NaN compare:[NSMutableNumber numberWithDouble:-0.1]], NSOrderedDescending);
+	XCTAssertEqual([NSMutableNumber.notANumber compare:[NSMutableNumber numberWithDouble:0.1]], NSOrderedAscending);
+	XCTAssertEqual([NSMutableNumber.notANumber compare:[NSMutableNumber numberWithDouble:0.0]], NSOrderedAscending);
+	XCTAssertEqual([NSMutableNumber.notANumber compare:[NSMutableNumber numberWithDouble:-0.0]], NSOrderedDescending);
+	XCTAssertEqual([NSMutableNumber.notANumber compare:[NSMutableNumber numberWithDouble:-0.1]], NSOrderedDescending);
 	XCTAssertEqual([[NSMutableNumber numberWithDouble:0.0] compare:[NSMutableNumber numberWithDouble:-0.0]], NSOrderedSame);
 	
-	XCTAssertEqual([NSMutableNumber.NaN compare:[NSMutableNumber numberWithInteger:1]], NSOrderedAscending);
-	XCTAssertEqual([NSMutableNumber.NaN compare:[NSMutableNumber numberWithInteger:0]], NSOrderedAscending);
-	XCTAssertEqual([NSMutableNumber.NaN compare:[NSMutableNumber numberWithInteger:-1]], NSOrderedDescending);
+	XCTAssertEqual([NSMutableNumber.notANumber compare:[NSMutableNumber numberWithInteger:1]], NSOrderedAscending);
+	XCTAssertEqual([NSMutableNumber.notANumber compare:[NSMutableNumber numberWithInteger:0]], NSOrderedAscending);
+	XCTAssertEqual([NSMutableNumber.notANumber compare:[NSMutableNumber numberWithInteger:-1]], NSOrderedDescending);
 	
-	XCTAssertEqual([NSMutableNumber.NaN compare:[NSMutableNumber numberWithUnsignedInteger:1]], NSOrderedAscending);
-	XCTAssertEqual([NSMutableNumber.NaN compare:[NSMutableNumber numberWithUnsignedInteger:0]], NSOrderedAscending);
+	XCTAssertEqual([NSMutableNumber.notANumber compare:[NSMutableNumber numberWithUnsignedInteger:1]], NSOrderedAscending);
+	XCTAssertEqual([NSMutableNumber.notANumber compare:[NSMutableNumber numberWithUnsignedInteger:0]], NSOrderedAscending);
 	//Reference
 	XCTAssertEqual([@(INFINITY) compare:@(INFINITY)], NSOrderedSame);
 	XCTAssertEqual([@(-INFINITY) compare:@(-INFINITY)], NSOrderedSame);
@@ -544,7 +544,7 @@
 	
 	XCTAssertEqual([leftNumber compare:NSMutableNumber.infinity], NSOrderedAscending);
 	XCTAssertEqual([leftNumber compare:NSMutableNumber.minusInfinity], NSOrderedDescending);
-	XCTAssertEqual([leftNumber compare:NSMutableNumber.NaN], NSOrderedAscending);
+	XCTAssertEqual([leftNumber compare:NSMutableNumber.notANumber], NSOrderedAscending);
 	
 }
 
@@ -560,10 +560,10 @@
 	XCTAssertTrue(NSMutableNumber.minusInfinity.isNegativeInfinity);
 }
 
-- (void)testNSMutableNumber_NaN
+- (void)testNSMutableNumber_notANumber
 {
-	XCTAssertEqualObjects(NSMutableNumber.NaN, @(NAN));
-	XCTAssertTrue(NSMutableNumber.NaN.isNAN);
+	XCTAssertEqualObjects(NSMutableNumber.notANumber, @(NAN));
+	XCTAssertTrue(NSMutableNumber.notANumber.isNAN);
 }
 
 - (void)testNSMutableNumber_zero
@@ -1652,10 +1652,10 @@
 	XCTAssertTrue(NSNumber.minusInfinity.isNegativeInfinity);
 }
 
-- (void)testNSNumber_NaN
+- (void)testNSNumber_notANumber
 {
-	XCTAssertEqualObjects(NSNumber.NaN, @(NAN));
-	XCTAssertTrue(NSNumber.NaN.isNAN);
+	XCTAssertEqualObjects(NSNumber.notANumber, @(NAN));
+	XCTAssertTrue(NSNumber.notANumber.isNAN);
 }
 
 - (void)testNSNumber_zero

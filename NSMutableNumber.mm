@@ -720,7 +720,7 @@
 
 + (nonnull NSMutableNumber *)infinity { return [[NSMutableNumber alloc] initWithDouble:INFINITY]; }
 + (nonnull NSMutableNumber *)minusInfinity { return [[NSMutableNumber alloc] initWithDouble:-INFINITY]; }
-+ (nonnull NSMutableNumber *)NaN { return [[NSMutableNumber alloc] initWithDouble:NAN]; }
++ (nonnull NSMutableNumber *)notANumber { return [[NSMutableNumber alloc] initWithDouble:NAN]; }
 + (nonnull NSMutableNumber *)zero { return [[NSMutableNumber alloc] initWithLongLong:0]; }
 + (nonnull NSMutableNumber *)negativeZero { return [[NSMutableNumber alloc] initWithDouble:-0.0]; }
 
@@ -818,7 +818,7 @@
 	return @(-INFINITY);
 }
 
-+ (NSNumber *)NaN
++ (NSNumber *)notANumber
 {
 	return @(NAN);
 }
@@ -868,8 +868,6 @@
 		case NSMNumberCType_unsigned_short: number = [[NSNumber alloc] initWithUnsignedShort:~self.unsignedShortValue]; break;
 		case NSMNumberCType_int: number = [[NSNumber alloc] initWithInt:~self.intValue]; break;
 		case NSMNumberCType_unsigned_int: number = [[NSNumber alloc] initWithUnsignedInt:~self.unsignedIntValue]; break;
-		case NSMNumberCType_NSInteger: number = [[NSNumber alloc] initWithInteger:~self.integerValue]; break;
-		case NSMNumberCType_NSUInteger: number = [[NSNumber alloc] initWithUnsignedInteger:~self.unsignedIntegerValue]; break;
 		case NSMNumberCType_long: number = [[NSNumber alloc] initWithLong:~self.longValue]; break;
 		case NSMNumberCType_unsigned_long: number = [[NSNumber alloc] initWithUnsignedLong:~self.unsignedLongValue]; break;
 		case NSMNumberCType_long_long: number = [[NSNumber alloc] initWithLongLong:~self.longLongValue]; break;
@@ -913,8 +911,6 @@
 		case NSMNumberCType_unsigned_short: number = [[NSNumber alloc] initWithUnsignedShort:self.unsignedShortValue + 1]; break;
 		case NSMNumberCType_int: number = [[NSNumber alloc] initWithInt:self.intValue + 1]; break;
 		case NSMNumberCType_unsigned_int: number = [[NSNumber alloc] initWithUnsignedInt:self.unsignedIntValue + 1]; break;
-		case NSMNumberCType_NSInteger: number = [[NSNumber alloc] initWithInteger:self.integerValue + 1]; break;
-		case NSMNumberCType_NSUInteger: number = [[NSNumber alloc] initWithUnsignedInteger:self.unsignedIntegerValue + 1]; break;
 		case NSMNumberCType_long: number = [[NSNumber alloc] initWithLong:self.longValue + 1]; break;
 		case NSMNumberCType_unsigned_long: number = [[NSNumber alloc] initWithUnsignedLong:self.unsignedLongValue + 1]; break;
 		case NSMNumberCType_long_long: number = [[NSNumber alloc] initWithLongLong:self.longLongValue + 1]; break;
@@ -936,8 +932,6 @@
 		case NSMNumberCType_unsigned_short: number = [[NSNumber alloc] initWithUnsignedShort:self.unsignedShortValue - 1]; break;
 		case NSMNumberCType_int: number = [[NSNumber alloc] initWithInt:self.intValue - 1]; break;
 		case NSMNumberCType_unsigned_int: number = [[NSNumber alloc] initWithUnsignedInt:self.unsignedIntValue - 1]; break;
-		case NSMNumberCType_NSInteger: number = [[NSNumber alloc] initWithInteger:self.integerValue - 1]; break;
-		case NSMNumberCType_NSUInteger: number = [[NSNumber alloc] initWithUnsignedInteger:self.unsignedIntegerValue - 1]; break;
 		case NSMNumberCType_long: number = [[NSNumber alloc] initWithLong:self.longValue - 1]; break;
 		case NSMNumberCType_unsigned_long: number = [[NSNumber alloc] initWithUnsignedLong:self.unsignedLongValue - 1]; break;
 		case NSMNumberCType_long_long: number = [[NSNumber alloc] initWithLongLong:self.longLongValue - 1]; break;

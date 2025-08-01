@@ -195,27 +195,27 @@
 /**
  @brief Thread safe INFINITY.
  */
-@property (class, readonly) NSMutableNumber * _Nonnull infinity;
+@property (class, copy, readonly) NSMutableNumber * _Nonnull infinity;
 
 /**
  @brief Thread safe -INFINITY.  `negativeInfinity` is already used as a define
  */
-@property (class, readonly) NSMutableNumber * _Nonnull minusInfinity;
+@property (class, copy, readonly) NSMutableNumber * _Nonnull minusInfinity;
 
 /**
  @brief Thread safe NaN.
  */
-@property (class, readonly) NSMutableNumber * _Nonnull NaN;
+@property (class, copy, readonly) NSMutableNumber * _Nonnull notANumber;
 
 /**
  @brief Thread safe zero.
  */
-@property (class, readonly) NSMutableNumber * _Nonnull zero;
+@property (class, copy, readonly) NSMutableNumber * _Nonnull zero;
 
 /**
  @brief Thread safe negative zero as a double.
  */
-@property (class, readonly) NSMutableNumber * _Nonnull negativeZero;
+@property (class, copy, readonly) NSMutableNumber * _Nonnull negativeZero;
 
 
 
@@ -319,7 +319,7 @@
 /**
  @brief Thread safe getter for the value presented as string.
  */
-@property (atomic, readonly, copy) NSString * _Nonnull stringValue;
+@property (atomic, copy, readonly) NSString * _Nonnull stringValue;
 
 
 /**
@@ -535,27 +535,27 @@
 /**
  @brief Thread safe INFINITY.
  */
-@property (class, readonly) NSNumber * _Nonnull infinity;
+@property (class, copy, readonly) NSNumber * _Nonnull infinity;
 
 /**
  @brief Thread safe -INFINITY.  negativeInfinite is already taken.
  */
-@property (class, readonly) NSNumber * _Nonnull minusInfinity;
+@property (class, copy, readonly) NSNumber * _Nonnull minusInfinity;
 
 /**
  @brief Thread safe NaN.
  */
-@property (class, readonly) NSNumber * _Nonnull NaN;
+@property (class, copy, readonly) NSNumber * _Nonnull notANumber;
 
 /**
  @brief Thread safe zero.
  */
-@property (class, readonly) NSNumber * _Nonnull zero;
+@property (class, copy, readonly) NSNumber * _Nonnull zero;
 
 /**
  @brief Thread safe zero.
  */
-@property (class, readonly) NSNumber * _Nonnull negativeZero;
+@property (class, copy, readonly) NSNumber * _Nonnull negativeZero;
 
 
 /**
