@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,7 +15,9 @@
 		3D9B1C0C1BF33C4F00C7CBA5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D9B1C0A1BF33C4F00C7CBA5 /* Main.storyboard */; };
 		3D9B1C0E1BF33C4F00C7CBA5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D9B1C0D1BF33C4F00C7CBA5 /* Assets.xcassets */; };
 		3D9B1C111BF33C4F00C7CBA5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D9B1C0F1BF33C4F00C7CBA5 /* LaunchScreen.storyboard */; };
-		3D9B1C1C1BF33C4F00C7CBA5 /* MNTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9B1C1B1BF33C4F00C7CBA5 /* MNTests.m */; };
+		CE0387792F6E5160000C19D0 /* NSMutableNumberTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0387782F6E5160000C19D0 /* NSMutableNumberTests.m */; };
+		CE03877B2F6E517B000C19D0 /* NSMockNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = CE03877A2F6E517B000C19D0 /* NSMockNumber.m */; };
+		CE03877F2F6E5258000C19D0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE03877E2F6E5258000C19D0 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,8 +45,11 @@
 		3D9B1C101BF33C4F00C7CBA5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3D9B1C121BF33C4F00C7CBA5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3D9B1C171BF33C4F00C7CBA5 /* tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3D9B1C1B1BF33C4F00C7CBA5 /* MNTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MNTests.m; sourceTree = "<group>"; };
 		3D9B1C1D1BF33C4F00C7CBA5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE0387782F6E5160000C19D0 /* NSMutableNumberTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSMutableNumberTests.m; sourceTree = "<group>"; };
+		CE03877A2F6E517B000C19D0 /* NSMockNumber.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSMockNumber.m; sourceTree = "<group>"; };
+		CE03877C2F6E5192000C19D0 /* NSMockNumber.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSMockNumber.h; sourceTree = "<group>"; };
+		CE03877E2F6E5258000C19D0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE03877F2F6E5258000C19D0 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,6 +76,7 @@
 			children = (
 				3D9B1C001BF33C4F00C7CBA5 /* MN */,
 				3D9B1C1A1BF33C4F00C7CBA5 /* MNTests */,
+				CE03877D2F6E5258000C19D0 /* Frameworks */,
 				3D9B1BFF1BF33C4F00C7CBA5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -113,10 +120,20 @@
 		3D9B1C1A1BF33C4F00C7CBA5 /* MNTests */ = {
 			isa = PBXGroup;
 			children = (
-				3D9B1C1B1BF33C4F00C7CBA5 /* MNTests.m */,
+				CE03877C2F6E5192000C19D0 /* NSMockNumber.h */,
+				CE03877A2F6E517B000C19D0 /* NSMockNumber.m */,
+				CE0387782F6E5160000C19D0 /* NSMutableNumberTests.m */,
 				3D9B1C1D1BF33C4F00C7CBA5 /* Info.plist */,
 			);
 			path = MNTests;
+			sourceTree = "<group>";
+		};
+		CE03877D2F6E5258000C19D0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CE03877E2F6E5258000C19D0 /* Foundation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,7 +180,8 @@
 		3D9B1BF61BF33C4F00C7CBA5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0710;
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 2630;
 				ORGANIZATIONNAME = "Oleh Kulykov";
 				TargetAttributes = {
 					3D9B1BFD1BF33C4F00C7CBA5 = {
@@ -180,6 +198,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -231,7 +250,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D7B01EE1BF4A48100741B06 /* NSMutableNumber.mm in Sources */,
-				3D9B1C1C1BF33C4F00C7CBA5 /* MNTests.m in Sources */,
+				CE03877B2F6E517B000C19D0 /* NSMockNumber.m in Sources */,
+				CE0387792F6E5160000C19D0 /* NSMutableNumberTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,17 +289,29 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -287,6 +319,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -301,10 +334,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 			};
 			name = Debug;
 		};
@@ -312,17 +346,29 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -330,6 +376,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -338,9 +385,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -350,7 +398,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MN/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = olehkulykov.NSMutableNumber;
 				PRODUCT_NAME = tests;
 			};
@@ -361,7 +413,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MN/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = olehkulykov.NSMutableNumber;
 				PRODUCT_NAME = tests;
 			};
@@ -372,7 +428,12 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = MNTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = fds.MNTests;
 				PRODUCT_NAME = tests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/tests.app/tests";
@@ -384,7 +445,12 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = MNTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = fds.MNTests;
 				PRODUCT_NAME = tests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/tests.app/tests";
