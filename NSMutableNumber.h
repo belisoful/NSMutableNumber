@@ -34,7 +34,7 @@
  <li> This class inherits all @b NSNumber protocols and overrides required methods for duplicate @b NSNumber read functionality.
  @code
 	NSNumber * number = (NSNumber *)[[NSMutableNumber alloc] initWithInt:0];
-	// use actual number NSMutableNumber class as NSNumber, of couce read only
+	// use actual number NSMutableNumber class as NSNumber, of course read only
  @endcode
  <li> All getters are thread safe. Can be used for cross-thread synchronization. Used recursive mutex for get/set values.
  <li> Same hash method as on @b NSNumber object - required for using as key with key/value coding classes.
@@ -45,7 +45,7 @@
 	[mutableNumber isKindOfClass:[NSMutableNumber class]]; // YES, is kind of class
  @endcode
  <li> Can be compared with self(eg. @b NSMutableNumber) or @b NSNumber class.
- Comparation checks both numbers for real, signed and unsigned value and selects required method for comparing between values.
+ Comparison checks both numbers for real, signed and unsigned value and selects required method for comparing between values.
  @code
 	[[NSMutableNumber numberWithBool:NO] isEqual:[NSNumber numberWithBool:NO]]; // YES, equal
 	[[NSMutableNumber numberWithBool:YES] isEqual:[NSNumber numberWithFloat:1]]; // YES, equal
@@ -60,7 +60,7 @@
 	[[NSMutableNumber numberWithUnsignedInteger:NSUIntegerMax] isEqual:[NSNumber numberWithUnsignedInteger:NSUIntegerMax]]; // YES, equal
 	[[NSMutableNumber numberWithUnsignedLongLong:ULONG_LONG_MAX] isEqual:[NSNumber numberWithUnsignedLongLong:ULONG_LONG_MAX]]; // YES, equal
  @endcode
- <li> Internal logic implemented with C++. Same performance as standart @b NSNumber (see time tests) and minimum ammount of memory for storing values(eg. unions).
+ <li> Internal logic implemented with C++. Same performance as standard @b NSNumber (see time tests) and minimum amount of memory for storing values(eg. unions).
  <li> @b NSNumber can be compared with this class via additional number comparator method @b isEqualToNumber:
  */
 @interface NSMutableNumber : NSObject <NSCopying, NSMutableCopying, NSSecureCoding>
@@ -307,8 +307,8 @@
 /**
  @brief Compare with other number object.
  @param object The number object. Supports @b NSNumber and @b NSMutableNumber object classes.
- @return Comparation result or @b NSOrderedDescending if parameter is nil or unsupported.
- @warning If parameter is nil or have unsupported class type than the result is @b NSOrderedDescending bacause
+ @return Comparison result or @b NSOrderedDescending if parameter is nil or unsupported.
+ @warning If parameter is nil or has an unsupported class type then the result is @b NSOrderedDescending because
  left operand is greater than the right, which is nil or unsupported.
  */
 - (NSComparisonResult) compare:(nullable id) object;
@@ -366,7 +366,7 @@
 
 
 /**
- @brief Thread save  bitwise NOT NSMutableNumber.
+ @brief Thread safe bitwise NOT NSMutableNumber.
  */
 @property (readonly) NSMutableNumber * _Nonnull bitNot;
 

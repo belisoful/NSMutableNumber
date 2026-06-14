@@ -360,11 +360,13 @@
 {
 	#if TARGET_OS_IOS || TARGET_OS_TV
 	{
-		// NSArchiver test only for macOS
-		XCTSkip(@"NSArchiver is stubbed but not implemented on iOS and iTV, apparently.");
+		XCTSkip(@"NSArchiver not implemented on iOS and iTV");
 		return;
 	}
+	// NSArchiver test only for macOS
 	#endif
+	
+	#if TARGET_OS_MAC
 	
 	Class NSArchiverClass = NSClassFromString(@"NSArchiver");
 	Class NSUnarchiverClass = NSClassFromString(@"NSUnarchiver");
@@ -413,6 +415,7 @@
 	XCTAssertEqual([result class],
 				   [NSMutableNumber class],
 				   @"Result should be NSMutableNumber class");
+	#endif
 }
 
 #pragma clang diagnostic pop
@@ -483,20 +486,10 @@
 	XCTAssertEqual([@(0) compare:@(NAN)], NSOrderedDescending);
 	XCTAssertEqual([@(-1) compare:@(NAN)], NSOrderedAscending);
 	
-	int platform_2Int = 1;
-#if TARGET_OS_IPHONE
-	platform_2Int = 0;
-#endif
-	
-	XCTAssertEqual(((NSInteger)INFINITY), platform_2Int);
-	XCTAssertEqual(((NSInteger)-INFINITY), platform_2Int);
-	XCTAssertEqual(((NSUInteger)INFINITY), platform_2Int);
-	XCTAssertEqual(((NSUInteger)-INFINITY), platform_2Int);
-	XCTAssertEqual(((NSInteger)NAN), platform_2Int);
-	XCTAssertEqual(((NSUInteger)NAN), platform_2Int);
-	
-	
-	
+	// (Raw C casts of INFINITY/NAN to integer types are undefined behavior whose result
+	// varies with compiler mode — e.g. plain vs ASan codegen — so they are not asserted here.
+	// The compare:-based assertions above cover the class's defined infinity/NaN behavior.)
+
 	leftNumber = [NSMutableNumber numberWithInteger:-10];
 	
 	XCTAssertEqual([leftNumber compare:[NSMutableNumber numberWithInteger:-11]], NSOrderedDescending);
@@ -2565,6 +2558,46 @@
 	XCTAssertFalse([NSNumber numberWithDouble:0].isNegativeInfinity);
 }
 
+- (void)testNSMutableNumber_addOne_DoublePreservesTypeAndPrecision {
+	NSMutableNumber *n = [NSMutableNumber numberWithDouble:0.1];
+	[n addOne];
+	XCTAssertEqual(strcmp(n.objCType, @encode(double)), 0, @"addOne must keep a double a double, not truncate to float");
+	XCTAssertEqual(n.doubleValue, 1.1, @"addOne on 0.1 must equal 1.1 at double precision");
+}
 
+- (void)testNSMutableNumber_minusOne_DoublePreservesTypeAndPrecision {
+	NSMutableNumber *n = [NSMutableNumber numberWithDouble:0.1];
+	[n minusOne];
+	XCTAssertEqual(strcmp(n.objCType, @encode(double)), 0, @"minusOne must keep a double a double, not truncate to float");
+	XCTAssertEqual(n.doubleValue, 0.1 - 1.0, @"minusOne on 0.1 must equal -0.9 at double precision");
+}
+
+// NSMockNumber preserves objCType 'C', exercising the NSNumber unsigned-char branch with a value
+// above 127 — where the prior initWithChar: would wrap to a negative signed char.
+- (void)testNSNumber_plusOne_UnsignedCharAboveSignedRange {
+	NSNumber *n = [NSMockNumber numberWithUnsignedChar:(unsigned char)200];
+	XCTAssertEqual(n.plusOne.intValue, 201, @"unsigned char 200 + 1 must be 201, not a signed-char wrap to -55");
+}
+
+- (void)testNSNumber_subtractOne_UnsignedCharAboveSignedRange {
+	NSNumber *n = [NSMockNumber numberWithUnsignedChar:(unsigned char)200];
+	XCTAssertEqual(n.subtractOne.intValue, 199, @"unsigned char 200 - 1 must be 199, not a signed-char wrap");
+}
+
+// compare: classifies the operand's encoding. A BOOL operand is signed; an unrecognized encoding
+// is unsupported and, per the documented contract, compares as NSOrderedDescending.
+- (void)testCompare_BoolOperandComparesAsSigned {
+	NSMutableNumber *one = [NSMutableNumber numberWithInt:1];
+	XCTAssertEqual([one compare:[NSMockNumber numberWithBool:YES]], NSOrderedSame);
+	XCTAssertEqual([one compare:[NSMockNumber numberWithBool:NO]], NSOrderedDescending);
+}
+
+- (void)testCompare_UnrecognizedEncoding_ReturnsDescending {
+	NSMockNumber *bogus = [NSMockNumber numberWithInt:1];
+	bogus.typeEncoding = "v"; // not a recognized numeric @encode
+	NSMutableNumber *one = [NSMutableNumber numberWithInt:1];
+	XCTAssertEqual([one compare:bogus], NSOrderedDescending,
+				   @"Unsupported operand encoding must compare as NSOrderedDescending");
+}
 
 @end

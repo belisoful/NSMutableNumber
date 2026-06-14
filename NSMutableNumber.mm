@@ -284,7 +284,7 @@
 		else _number.set<unsigned long long>(_number.get<unsigned long long>() + 1, NSMNumberValueTypeU);
 	} else if (_number.isReal()) {
 		if (_number.reserved[0] == sizeof(float)) _number.set<float>(_number.get<float>() + 1.0, NSMNumberValueTypeR);
-		else _number.set<float>(_number.get<float>() + 1.0, NSMNumberValueTypeR);
+		else _number.set<double>(_number.get<double>() + 1.0, NSMNumberValueTypeR);
 	} else {
 		if (_number.reserved[0] == sizeof(char)) _number.set<char>(_number.get<char>() + 1, NSMNumberValueTypeI);
 		else if (_number.reserved[0] == sizeof(short)) _number.set<short>(_number.get<short>() + 1, NSMNumberValueTypeI);
@@ -306,7 +306,7 @@
 		else _number.set<unsigned long long>(_number.get<unsigned long long>() - 1, NSMNumberValueTypeU);
 	} else if (_number.isReal()) {
 		if (_number.reserved[0] == sizeof(float)) _number.set<float>(_number.get<float>() - 1.0, NSMNumberValueTypeR);
-		else _number.set<float>(_number.get<float>() - 1.0, NSMNumberValueTypeR);
+		else _number.set<double>(_number.get<double>() - 1.0, NSMNumberValueTypeR);
 	} else {
 		if (_number.reserved[0] == sizeof(char)) _number.set<char>(_number.get<char>() - 1, NSMNumberValueTypeI);
 		else if (_number.reserved[0] == sizeof(short)) _number.set<short>(_number.get<short>() - 1, NSMNumberValueTypeI);
@@ -682,7 +682,7 @@
 		const NSUInteger type = NSMNumberCTypeFromEncoded([object objCType]);
 		if (NSMNumberCTypeIsUnsigned(type)) r = [self compareWithUnsigned:object];
 		else if (NSMNumberCTypeIsReal(type)) r = [self compareWithReal:object];
-		else r = [self compareWithSigned:object];
+		else if (NSMNumberCTypeIsSigned(type)) r = [self compareWithSigned:object];
 	}
 	_number.unlock();
 	return r;
@@ -874,8 +874,10 @@
 		case NSMNumberCType_unsigned_short: number = [[NSNumber alloc] initWithUnsignedShort:~self.unsignedShortValue]; break;
 		case NSMNumberCType_int: number = [[NSNumber alloc] initWithInt:~self.intValue]; break;
 		case NSMNumberCType_unsigned_int: number = [[NSNumber alloc] initWithUnsignedInt:~self.unsignedIntValue]; break;
+#if !__LP64__ // ILP32 only — on LP64 long encodes as long long, so these are unreachable
 		case NSMNumberCType_long: number = [[NSNumber alloc] initWithLong:~self.longValue]; break;
 		case NSMNumberCType_unsigned_long: number = [[NSNumber alloc] initWithUnsignedLong:~self.unsignedLongValue]; break;
+#endif
 		case NSMNumberCType_long_long: number = [[NSNumber alloc] initWithLongLong:~self.longLongValue]; break;
 		case NSMNumberCType_unsigned_long_long: number = [[NSNumber alloc] initWithUnsignedLongLong:~self.unsignedLongLongValue]; break;
 	}
@@ -895,8 +897,10 @@
 		case NSMNumberCType_unsigned_short: bitNot = ~self.unsignedShortValue; break;
 		case NSMNumberCType_int: bitNot = ~self.intValue; break;
 		case NSMNumberCType_unsigned_int: bitNot = ~self.unsignedIntValue; break;
+#if !__LP64__ // ILP32 only — on LP64 long encodes as long long, so these are unreachable
 		case NSMNumberCType_long: bitNot = ~self.longValue; break;
 		case NSMNumberCType_unsigned_long: bitNot = ~self.unsignedLongValue; break;
+#endif
 		case NSMNumberCType_long_long: bitNot = ~self.longLongValue; break;
 		case NSMNumberCType_unsigned_long_long: bitNot = ~self.unsignedLongLongValue; break;
 	}
@@ -912,13 +916,15 @@
 		case NSMNumberCType_double: number = [[NSNumber alloc] initWithDouble:self.doubleValue +1.0]; break;
 		case NSMNumberCType_float: number = [[NSNumber alloc] initWithFloat:self.floatValue + 1.0]; break;
 		case NSMNumberCType_char: number = [[NSNumber alloc] initWithChar:self.charValue + 1]; break;
-		case NSMNumberCType_unsigned_char: number = [[NSNumber alloc] initWithChar:self.unsignedCharValue + 1]; break;
+		case NSMNumberCType_unsigned_char: number = [[NSNumber alloc] initWithUnsignedChar:self.unsignedCharValue + 1]; break;
 		case NSMNumberCType_short: number = [[NSNumber alloc] initWithShort:self.shortValue + 1]; break;
 		case NSMNumberCType_unsigned_short: number = [[NSNumber alloc] initWithUnsignedShort:self.unsignedShortValue + 1]; break;
 		case NSMNumberCType_int: number = [[NSNumber alloc] initWithInt:self.intValue + 1]; break;
 		case NSMNumberCType_unsigned_int: number = [[NSNumber alloc] initWithUnsignedInt:self.unsignedIntValue + 1]; break;
+#if !__LP64__ // ILP32 only — on LP64 long encodes as long long, so these are unreachable
 		case NSMNumberCType_long: number = [[NSNumber alloc] initWithLong:self.longValue + 1]; break;
 		case NSMNumberCType_unsigned_long: number = [[NSNumber alloc] initWithUnsignedLong:self.unsignedLongValue + 1]; break;
+#endif
 		case NSMNumberCType_long_long: number = [[NSNumber alloc] initWithLongLong:self.longLongValue + 1]; break;
 		case NSMNumberCType_unsigned_long_long: number = [[NSNumber alloc] initWithUnsignedLongLong:self.unsignedLongLongValue + 1]; break;
 	}
@@ -933,13 +939,15 @@
 		case NSMNumberCType_double: number = [[NSNumber alloc] initWithDouble:self.doubleValue - 1.0]; break;
 		case NSMNumberCType_float: number = [[NSNumber alloc] initWithFloat:self.floatValue - 1.0]; break;
 		case NSMNumberCType_char: number = [[NSNumber alloc] initWithChar:self.charValue - 1]; break;
-		case NSMNumberCType_unsigned_char: number = [[NSNumber alloc] initWithChar:self.unsignedCharValue - 1]; break;
+		case NSMNumberCType_unsigned_char: number = [[NSNumber alloc] initWithUnsignedChar:self.unsignedCharValue - 1]; break;
 		case NSMNumberCType_short: number = [[NSNumber alloc] initWithShort:self.shortValue - 1]; break;
 		case NSMNumberCType_unsigned_short: number = [[NSNumber alloc] initWithUnsignedShort:self.unsignedShortValue - 1]; break;
 		case NSMNumberCType_int: number = [[NSNumber alloc] initWithInt:self.intValue - 1]; break;
 		case NSMNumberCType_unsigned_int: number = [[NSNumber alloc] initWithUnsignedInt:self.unsignedIntValue - 1]; break;
+#if !__LP64__ // ILP32 only — on LP64 long encodes as long long, so these are unreachable
 		case NSMNumberCType_long: number = [[NSNumber alloc] initWithLong:self.longValue - 1]; break;
 		case NSMNumberCType_unsigned_long: number = [[NSNumber alloc] initWithUnsignedLong:self.unsignedLongValue - 1]; break;
+#endif
 		case NSMNumberCType_long_long: number = [[NSNumber alloc] initWithLongLong:self.longLongValue - 1]; break;
 		case NSMNumberCType_unsigned_long_long: number = [[NSNumber alloc] initWithUnsignedLongLong:self.unsignedLongLongValue - 1]; break;
 	}

@@ -1,0 +1,69 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  macos-tests:
+    name: Tests (native macOS, host-less)
+    runs-on: macos-15
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Show Xcode version
+        run: xcodebuild -version
+
+      - name: Run unit tests
+        run: |
+          set -o pipefail
+          xcodebuild test \
+            -project NSMutableNumber.xcodeproj \
+            -scheme NSMutableNumber-macOS \
+            -destination 'platform=macOS'
+
+  ios-tests:
+    name: Tests (iOS Simulator)
+    runs-on: macos-15
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run unit tests
+        run: |
+          set -o pipefail
+          DEVICE_ID=$(xcrun simctl list devices available \
+            | grep -E "iPhone|iPad" \
+            | grep -oE "[0-9A-F-]{36}" | head -1)
+          echo "Using simulator: $DEVICE_ID"
+          xcodebuild test \
+            -project NSMutableNumber.xcodeproj \
+            -scheme NSMutableNumber-iOS \
+            -destination "platform=iOS Simulator,id=$DEVICE_ID"
+
+  address-sanitizer:
+    name: Tests under AddressSanitizer (macOS)
+    runs-on: macos-15
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run unit tests with ASan
+        run: |
+          set -o pipefail
+          xcodebuild test \
+            -project NSMutableNumber.xcodeproj \
+            -scheme NSMutableNumber-macOS \
+            -destination 'platform=macOS' \
+            -enableAddressSanitizer YES

@@ -83,6 +83,7 @@ FOUNDATION_STATIC_INLINE NSUInteger NSMNumberCTypeIsSigned(const NSUInteger type
 		case NSMNumberCType_char:
 		case NSMNumberCType_short:
 		case NSMNumberCType_long:
+		case NSMNumberCType_BOOL: // BOOL is stored as a signed value and compares as signed
 			return 1;
 			break;
 		default: break;

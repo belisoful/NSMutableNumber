@@ -15,9 +15,13 @@
 		3D9B1C0C1BF33C4F00C7CBA5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D9B1C0A1BF33C4F00C7CBA5 /* Main.storyboard */; };
 		3D9B1C0E1BF33C4F00C7CBA5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D9B1C0D1BF33C4F00C7CBA5 /* Assets.xcassets */; };
 		3D9B1C111BF33C4F00C7CBA5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D9B1C0F1BF33C4F00C7CBA5 /* LaunchScreen.storyboard */; };
+		548E75E622F74C49F17B3EA3 /* NSMutableNumber.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3D7B01EC1BF4A48100741B06 /* NSMutableNumber.mm */; };
+		C57703D79014485DC3B9012D /* libNSMutableNumber.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 822A076A9283A0CFA3685A02 /* libNSMutableNumber.a */; };
 		CE0387792F6E5160000C19D0 /* NSMutableNumberTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0387782F6E5160000C19D0 /* NSMutableNumberTests.m */; };
 		CE03877B2F6E517B000C19D0 /* NSMockNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = CE03877A2F6E517B000C19D0 /* NSMockNumber.m */; };
 		CE03877F2F6E5258000C19D0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE03877E2F6E5258000C19D0 /* Foundation.framework */; };
+		DDDD0001AAAA0001BBBB0009 /* NSMockNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = CE03877A2F6E517B000C19D0 /* NSMockNumber.m */; };
+		DDDD0001AAAA0001BBBB000A /* NSMutableNumberTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0387782F6E5160000C19D0 /* NSMutableNumberTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,12 +32,19 @@
 			remoteGlobalIDString = 3D9B1BFD1BF33C4F00C7CBA5;
 			remoteInfo = MN;
 		};
+		79D3BEBAC172F6AAF8E61CAC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3D9B1BF61BF33C4F00C7CBA5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B03331080E440C4289BC8B4A;
+			remoteInfo = NSMutableNumber;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3D7B01EB1BF4A48100741B06 /* NSMutableNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSMutableNumber.h; path = ../../NSMutableNumber.h; sourceTree = "<group>"; };
-		3D7B01EC1BF4A48100741B06 /* NSMutableNumber.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = NSMutableNumber.mm; path = ../../NSMutableNumber.mm; sourceTree = "<group>"; };
-		3D80B6661C5AEACF00F0C938 /* NSMutableNumber.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = NSMutableNumber.hpp; path = ../../NSMutableNumber.hpp; sourceTree = "<group>"; };
+		3D7B01EB1BF4A48100741B06 /* NSMutableNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSMutableNumber.h; sourceTree = "<group>"; };
+		3D7B01EC1BF4A48100741B06 /* NSMutableNumber.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSMutableNumber.mm; sourceTree = "<group>"; };
+		3D80B6661C5AEACF00F0C938 /* NSMutableNumber.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = NSMutableNumber.hpp; sourceTree = "<group>"; };
 		3D9B1BFE1BF33C4F00C7CBA5 /* tests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D9B1C021BF33C4F00C7CBA5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3D9B1C041BF33C4F00C7CBA5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -46,10 +57,12 @@
 		3D9B1C121BF33C4F00C7CBA5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3D9B1C171BF33C4F00C7CBA5 /* tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D9B1C1D1BF33C4F00C7CBA5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		822A076A9283A0CFA3685A02 /* libNSMutableNumber.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libNSMutableNumber.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE0387782F6E5160000C19D0 /* NSMutableNumberTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSMutableNumberTests.m; sourceTree = "<group>"; };
 		CE03877A2F6E517B000C19D0 /* NSMockNumber.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSMockNumber.m; sourceTree = "<group>"; };
 		CE03877C2F6E5192000C19D0 /* NSMockNumber.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSMockNumber.h; sourceTree = "<group>"; };
 		CE03877E2F6E5258000C19D0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		DDDD0001AAAA0001BBBB0007 /* testsTests-macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "testsTests-macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,14 +81,32 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		83ECEBEC50751D4D20A7D1FA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DDDD0001AAAA0001BBBB0006 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C57703D79014485DC3B9012D /* libNSMutableNumber.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		3D9B1BF51BF33C4F00C7CBA5 = {
 			isa = PBXGroup;
 			children = (
-				3D9B1C001BF33C4F00C7CBA5 /* MN */,
-				3D9B1C1A1BF33C4F00C7CBA5 /* MNTests */,
+				3D80B6661C5AEACF00F0C938 /* NSMutableNumber.hpp */,
+				3D7B01EB1BF4A48100741B06 /* NSMutableNumber.h */,
+				3D7B01EC1BF4A48100741B06 /* NSMutableNumber.mm */,
+				3D9B1C001BF33C4F00C7CBA5 /* ExampleApp */,
+				3D9B1C1A1BF33C4F00C7CBA5 /* Tests */,
 				CE03877D2F6E5258000C19D0 /* Frameworks */,
 				3D9B1BFF1BF33C4F00C7CBA5 /* Products */,
 			);
@@ -86,16 +117,15 @@
 			children = (
 				3D9B1BFE1BF33C4F00C7CBA5 /* tests.app */,
 				3D9B1C171BF33C4F00C7CBA5 /* tests.xctest */,
+				DDDD0001AAAA0001BBBB0007 /* testsTests-macOS.xctest */,
+				822A076A9283A0CFA3685A02 /* libNSMutableNumber.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		3D9B1C001BF33C4F00C7CBA5 /* MN */ = {
+		3D9B1C001BF33C4F00C7CBA5 /* ExampleApp */ = {
 			isa = PBXGroup;
 			children = (
-				3D80B6661C5AEACF00F0C938 /* NSMutableNumber.hpp */,
-				3D7B01EB1BF4A48100741B06 /* NSMutableNumber.h */,
-				3D7B01EC1BF4A48100741B06 /* NSMutableNumber.mm */,
 				3D9B1C041BF33C4F00C7CBA5 /* AppDelegate.h */,
 				3D9B1C051BF33C4F00C7CBA5 /* AppDelegate.m */,
 				3D9B1C071BF33C4F00C7CBA5 /* ViewController.h */,
@@ -106,7 +136,7 @@
 				3D9B1C121BF33C4F00C7CBA5 /* Info.plist */,
 				3D9B1C011BF33C4F00C7CBA5 /* Supporting Files */,
 			);
-			path = MN;
+			path = ExampleApp;
 			sourceTree = "<group>";
 		};
 		3D9B1C011BF33C4F00C7CBA5 /* Supporting Files */ = {
@@ -117,7 +147,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		3D9B1C1A1BF33C4F00C7CBA5 /* MNTests */ = {
+		3D9B1C1A1BF33C4F00C7CBA5 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 				CE03877C2F6E5192000C19D0 /* NSMockNumber.h */,
@@ -125,7 +155,7 @@
 				CE0387782F6E5160000C19D0 /* NSMutableNumberTests.m */,
 				3D9B1C1D1BF33C4F00C7CBA5 /* Info.plist */,
 			);
-			path = MNTests;
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		CE03877D2F6E5258000C19D0 /* Frameworks */ = {
@@ -137,6 +167,16 @@
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		153BD12D6F2F5C86581DD0F2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		3D9B1BFD1BF33C4F00C7CBA5 /* tests */ = {
@@ -174,6 +214,40 @@
 			productReference = 3D9B1C171BF33C4F00C7CBA5 /* tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		B03331080E440C4289BC8B4A /* NSMutableNumber */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 068CA98EDB3E8B6EEB13CDDA /* Build configuration list for PBXNativeTarget "NSMutableNumber" */;
+			buildPhases = (
+				153BD12D6F2F5C86581DD0F2 /* Headers */,
+				2424DA11F10D8F19D28D1929 /* Sources */,
+				83ECEBEC50751D4D20A7D1FA /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NSMutableNumber;
+			productName = NSMutableNumber;
+			productReference = 822A076A9283A0CFA3685A02 /* libNSMutableNumber.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		DDDD0001AAAA0001BBBB0001 /* testsTests-macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DDDD0001AAAA0001BBBB0002 /* Build configuration list for PBXNativeTarget "testsTests-macOS" */;
+			buildPhases = (
+				DDDD0001AAAA0001BBBB0005 /* Sources */,
+				DDDD0001AAAA0001BBBB0006 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E90825308E0783FC276D490D /* PBXTargetDependency */,
+			);
+			name = "testsTests-macOS";
+			productName = "testsTests-macOS";
+			productReference = DDDD0001AAAA0001BBBB0007 /* testsTests-macOS.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -181,7 +255,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 2630;
+				LastUpgradeCheck = 2650;
 				ORGANIZATIONNAME = "Oleh Kulykov";
 				TargetAttributes = {
 					3D9B1BFD1BF33C4F00C7CBA5 = {
@@ -193,7 +267,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 3D9B1BF91BF33C4F00C7CBA5 /* Build configuration list for PBXProject "tests" */;
+			buildConfigurationList = 3D9B1BF91BF33C4F00C7CBA5 /* Build configuration list for PBXProject "NSMutableNumber" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -209,6 +283,8 @@
 			targets = (
 				3D9B1BFD1BF33C4F00C7CBA5 /* tests */,
 				3D9B1C161BF33C4F00C7CBA5 /* testsTests */,
+				DDDD0001AAAA0001BBBB0001 /* testsTests-macOS */,
+				B03331080E440C4289BC8B4A /* NSMutableNumber */,
 			);
 		};
 /* End PBXProject section */
@@ -234,6 +310,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		2424DA11F10D8F19D28D1929 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				548E75E622F74C49F17B3EA3 /* NSMutableNumber.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3D9B1BFA1BF33C4F00C7CBA5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -255,6 +339,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DDDD0001AAAA0001BBBB0005 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DDDD0001AAAA0001BBBB000A /* NSMutableNumberTests.m in Sources */,
+				DDDD0001AAAA0001BBBB0009 /* NSMockNumber.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -262,6 +355,12 @@
 			isa = PBXTargetDependency;
 			target = 3D9B1BFD1BF33C4F00C7CBA5 /* tests */;
 			targetProxy = 3D9B1C181BF33C4F00C7CBA5 /* PBXContainerItemProxy */;
+		};
+		E90825308E0783FC276D490D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = NSMutableNumber;
+			target = B03331080E440C4289BC8B4A /* NSMutableNumber */;
+			targetProxy = 79D3BEBAC172F6AAF8E61CAC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -285,6 +384,19 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		0A3C59B35749E61B55B78BF5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEAD_CODE_STRIPPING = YES;
+				EXECUTABLE_PREFIX = lib;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = macosx;
+			};
+			name = Debug;
+		};
 		3D9B1C1E1BF33C4F00C7CBA5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -397,7 +509,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = MN/Info.plist;
+				CODE_SIGNING_ALLOWED = NO;
+				INFOPLIST_FILE = ExampleApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -412,7 +525,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = MN/Info.plist;
+				CODE_SIGNING_ALLOWED = NO;
+				INFOPLIST_FILE = ExampleApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -427,15 +541,23 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = MNTests/Info.plist;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = "";
+				INFOPLIST_FILE = Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = fds.MNTests;
+				PRODUCT_BUNDLE_IDENTIFIER = belisoful.NSMutableNumber;
 				PRODUCT_NAME = tests;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/tests.app/tests";
 			};
 			name = Debug;
@@ -444,23 +566,99 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = MNTests/Info.plist;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = "";
+				INFOPLIST_FILE = Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = fds.MNTests;
+				PRODUCT_BUNDLE_IDENTIFIER = belisoful.NSMutableNumber;
 				PRODUCT_NAME = tests;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/tests.app/tests";
+			};
+			name = Release;
+		};
+		A24BF5478B6541EFC1FA8D77 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEAD_CODE_STRIPPING = YES;
+				EXECUTABLE_PREFIX = lib;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = macosx;
+			};
+			name = Release;
+		};
+		DDDD0001AAAA0001BBBB0003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_TESTING_SEARCH_PATHS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lc++",
+					"-framework",
+					XCTest,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "belisoful.NSMutableNumber-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = macosx;
+			};
+			name = Debug;
+		};
+		DDDD0001AAAA0001BBBB0004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_TESTING_SEARCH_PATHS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lc++",
+					"-framework",
+					XCTest,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "belisoful.NSMutableNumber-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = macosx;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3D9B1BF91BF33C4F00C7CBA5 /* Build configuration list for PBXProject "tests" */ = {
+		068CA98EDB3E8B6EEB13CDDA /* Build configuration list for PBXNativeTarget "NSMutableNumber" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A24BF5478B6541EFC1FA8D77 /* Release */,
+				0A3C59B35749E61B55B78BF5 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3D9B1BF91BF33C4F00C7CBA5 /* Build configuration list for PBXProject "NSMutableNumber" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3D9B1C1E1BF33C4F00C7CBA5 /* Debug */,
@@ -483,6 +681,15 @@
 			buildConfigurations = (
 				3D9B1C241BF33C4F00C7CBA5 /* Debug */,
 				3D9B1C251BF33C4F00C7CBA5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DDDD0001AAAA0001BBBB0002 /* Build configuration list for PBXNativeTarget "testsTests-macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DDDD0001AAAA0001BBBB0003 /* Debug */,
+				DDDD0001AAAA0001BBBB0004 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
