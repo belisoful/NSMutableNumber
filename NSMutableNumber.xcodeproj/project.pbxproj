@@ -62,6 +62,9 @@
 		CE03877A2F6E517B000C19D0 /* NSMockNumber.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSMockNumber.m; sourceTree = "<group>"; };
 		CE03877C2F6E5192000C19D0 /* NSMockNumber.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSMockNumber.h; sourceTree = "<group>"; };
 		CE03877E2F6E5258000C19D0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		CE298ACE2FE006A900A9A7FB /* CHANGELOG */ = {isa = PBXFileReference; lastKnownFileType = text; path = CHANGELOG; sourceTree = "<group>"; };
+		CE298ACF2FE006BB00A9A7FB /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		CE298AD02FE006CA00A9A7FB /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		DDDD0001AAAA0001BBBB0007 /* testsTests-macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "testsTests-macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -102,9 +105,12 @@
 		3D9B1BF51BF33C4F00C7CBA5 = {
 			isa = PBXGroup;
 			children = (
+				CE298ACE2FE006A900A9A7FB /* CHANGELOG */,
+				CE298ACF2FE006BB00A9A7FB /* LICENSE */,
 				3D80B6661C5AEACF00F0C938 /* NSMutableNumber.hpp */,
 				3D7B01EB1BF4A48100741B06 /* NSMutableNumber.h */,
 				3D7B01EC1BF4A48100741B06 /* NSMutableNumber.mm */,
+				CE298AD02FE006CA00A9A7FB /* README.md */,
 				3D9B1C001BF33C4F00C7CBA5 /* ExampleApp */,
 				3D9B1C1A1BF33C4F00C7CBA5 /* Tests */,
 				CE03877D2F6E5258000C19D0 /* Frameworks */,

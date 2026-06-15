@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/github/license/belisoful/NSMutableNumber.svg)](https://github.com/belisoful/NSMutableNumber/blob/master/LICENSE)
 
 
-# NSMutableNumber 1.2.4 (June 2026)
+# NSMutableNumber 1.2.5 (June 2026)
 NSMutableNumber - full thread-safe mutable NSNumber implementation with NSNumber extensions.
 
 

@@ -1,4 +1,13 @@
-Changes on version 1.2.3 (current):
+Changes on version 1.2.5 (2026-06-15, current):
+- x86_64 support tweak
+
+Changes on version 1.2.4 (2026-06-14):
+- uses double rather than float.
+- Real Xcode project
+- Real GitHub workflow
+- rm 32 bit int paths for 64 bit systems
+
+Changes on version 1.2.3:
 - Changed NaN to notANumber, for alignment with NSDecimalNumber.
 - copy the class numbers like zero, one, infinity, etc.
 - Property to construct special number: one, for alignment with NSDecimalNumber.
