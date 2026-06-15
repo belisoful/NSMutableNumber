@@ -683,6 +683,7 @@
 		if (NSMNumberCTypeIsUnsigned(type)) r = [self compareWithUnsigned:object];
 		else if (NSMNumberCTypeIsReal(type)) r = [self compareWithReal:object];
 		else if (NSMNumberCTypeIsSigned(type)) r = [self compareWithSigned:object];
+		// else: unrecognized encoding is unsupported -> r stays NSOrderedDescending (per contract)
 	}
 	_number.unlock();
 	return r;

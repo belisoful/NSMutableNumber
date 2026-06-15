@@ -365,9 +365,9 @@
 	}
 	// NSArchiver test only for macOS
 	#endif
-	
+
 	#if TARGET_OS_MAC
-	
+
 	Class NSArchiverClass = NSClassFromString(@"NSArchiver");
 	Class NSUnarchiverClass = NSClassFromString(@"NSUnarchiver");
 

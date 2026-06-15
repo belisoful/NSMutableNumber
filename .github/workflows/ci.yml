@@ -51,6 +51,26 @@ jobs:
             -scheme NSMutableNumber-iOS \
             -destination "platform=iOS Simulator,id=$DEVICE_ID"
 
+  x86-tests:
+    name: Tests (macOS x86_64)
+    runs-on: macos-15
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Rosetta
+        # macos-15 runners are Apple Silicon; the x86_64 test bundle runs under Rosetta.
+        run: softwareupdate --install-rosetta --agree-to-license
+
+      - name: Run unit tests (x86_64)
+        run: |
+          set -o pipefail
+          xcodebuild test \
+            -project NSMutableNumber.xcodeproj \
+            -scheme NSMutableNumber-macOS \
+            -destination 'platform=macOS,arch=x86_64'
+
   address-sanitizer:
     name: Tests under AddressSanitizer (macOS)
     runs-on: macos-15

@@ -47,10 +47,13 @@
 FOUNDATION_STATIC_INLINE NSUInteger NSMNumberCTypeFromEncoded(const char * type) {
 	const NSUInteger t = *(const uint16_t*)type; /// can't hardcode @encode result, just use in runtime.
 	if (t == *(const uint16_t*)@encode(int)) return NSMNumberCType_int;
+	// char before BOOL: on x86_64 BOOL and char share the encoding "c". Matching NSNumber, the
+	// ambiguous "c" must resolve to a full-range char rather than normalizing to 0/1. On arm64 BOOL
+	// is the distinct encoding "B", so it is still matched below and this ordering has no effect.
+	else if (t == *(const uint16_t*)@encode(char)) return NSMNumberCType_char;
 	else if (t == *(const uint16_t*)@encode(BOOL)) return NSMNumberCType_BOOL;
 	else if (t == *(const uint16_t*)@encode(double)) return NSMNumberCType_double;
 	else if (t == *(const uint16_t*)@encode(float)) return NSMNumberCType_float;
-	else if (t == *(const uint16_t*)@encode(char)) return NSMNumberCType_char;
 	else if (t == *(const uint16_t*)@encode(long long)) return NSMNumberCType_long_long;
 	else if (t == *(const uint16_t*)@encode(unsigned long long)) return NSMNumberCType_unsigned_long_long;
 	else if (t == *(const uint16_t*)@encode(unsigned char)) return NSMNumberCType_unsigned_char;
@@ -264,4 +267,4 @@ public:
 	}
 };
 
-#endif 
+#endif
