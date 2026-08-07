@@ -1,4 +1,17 @@
-Changes on version 1.2.5 (2026-06-15, current):
+Changes on version 1.3.0 (2026-08-07, current):
+- NSMutableNumber is now a genuine NSNumber subclass (was NSObject with an isKindOfClass:
+  override). Equality with plain NSNumber is now symmetric, NSSet/NSDictionary lookups work
+  in both directions, CFNumberRef toll-free bridging works, and inherited NSNumber API such
+  as decimalValue is available (it previously raised unrecognized selector).
+- classForCoder/classForKeyedArchiver return [self class] instead of a hardcoded class.
+  Keyed archives still round-trip as NSMutableNumber; subclasses now keep their identity.
+  Archivable subclasses must declare both overrides themselves (NSKeyedUnarchiver rejects
+  inherited coder-class methods on subclasses of plist types); see the header.
+- Factory constructors (+numberWithInt: etc., +zero/+one/...) use [self alloc], and
+  copyWithZone:/mutableCopyWithZone: use [self.class allocWithZone:], so subclasses
+  receive instances of their own class.
+
+Changes on version 1.2.5 (2026-06-15):
 - x86_64 support tweak
 
 Changes on version 1.2.4 (2026-06-14):

@@ -51,7 +51,7 @@
 - (NSNumber*) copyWithZone:(nullable NSZone *) zone
 {
 	_number.lock();
-	NSMutableNumber * n = [[NSMutableNumber allocWithZone:zone] init];
+	NSMutableNumber * n = (NSMutableNumber *)[[self.class allocWithZone:zone] init];
 	_number.copyDataToNumber(&n->_number);
 	_number.unlock();
 	return (NSNumber*)n;
@@ -68,7 +68,7 @@
 - (nonnull NSMutableNumber *) mutableCopyWithZone:(nullable NSZone *) zone
 {
 	_number.lock();
-	NSMutableNumber * n = [[NSMutableNumber allocWithZone:zone] init];
+	NSMutableNumber * n = (NSMutableNumber *)[[self.class allocWithZone:zone] init];
 	_number.copyDataToNumber(&n->_number);
 	_number.unlock();
 	return n;
@@ -150,12 +150,16 @@
 	return self;
 }
 
+// NSArchiver and NSKeyedArchiver both flatten NSNumber instances to primitive values,
+// which drops the class (and its mutability) from the archive. Overriding the coder
+// classes routes archiving through encodeWithCoder:/initWithCoder: instead. [self class]
+// keeps subclass identity across a round-trip.
 - (Class) classForCoder {
-	return [NSMutableNumber class];
+	return [self class];
 }
 
 - (Class) classForKeyedArchiver {
-	return [NSMutableNumber class];
+	return [self class];
 }
 
 - (nonnull NSNumber *) immutableCopy {
@@ -179,10 +183,6 @@
 	return immutableNumber;
 }
 
-- (BOOL) isKindOfClass:(Class) aClass {
-	return (aClass == [NSNumber class] || aClass == [NSValue class]) ? YES : [super isKindOfClass:aClass];
-}
-
 #pragma mark - NSMutableNumber Extensions
 
 - (NSMutableNumber *)bitNot
@@ -190,18 +190,18 @@
 	NSMutableNumber * bitNotNumber = nil;
 	_number.lock();
 	if (_number.isUnsigned()) {
-		if (_number.reserved[0] == sizeof(unsigned char)) bitNotNumber = [[NSMutableNumber alloc] initWithUnsignedChar:~_number.get<unsigned char>()];
-		else if (_number.reserved[0] == sizeof(unsigned short)) bitNotNumber = [[NSMutableNumber alloc] initWithUnsignedShort:~_number.get<unsigned short>()];
-		else if (_number.reserved[0] == sizeof(unsigned int)) bitNotNumber = [[NSMutableNumber alloc] initWithUnsignedInt:~_number.get<unsigned int>()];
-		else bitNotNumber = [[NSMutableNumber alloc] initWithUnsignedLongLong:~_number.get<unsigned long long>()];
+		if (_number.reserved[0] == sizeof(unsigned char)) bitNotNumber = [[self.class alloc] initWithUnsignedChar:~_number.get<unsigned char>()];
+		else if (_number.reserved[0] == sizeof(unsigned short)) bitNotNumber = [[self.class alloc] initWithUnsignedShort:~_number.get<unsigned short>()];
+		else if (_number.reserved[0] == sizeof(unsigned int)) bitNotNumber = [[self.class alloc] initWithUnsignedInt:~_number.get<unsigned int>()];
+		else bitNotNumber = [[self.class alloc] initWithUnsignedLongLong:~_number.get<unsigned long long>()];
 	} else if (_number.isReal()) {
-		if (_number.reserved[0] == sizeof(float)) bitNotNumber = [[NSMutableNumber alloc] initWithLongLong:~(long long)_number.get<float>()];
-		else bitNotNumber = [[NSMutableNumber alloc] initWithLongLong:~(long long)_number.get<double>()];
+		if (_number.reserved[0] == sizeof(float)) bitNotNumber = [[self.class alloc] initWithLongLong:~(long long)_number.get<float>()];
+		else bitNotNumber = [[self.class alloc] initWithLongLong:~(long long)_number.get<double>()];
 	} else {
-		if (_number.reserved[0] == sizeof(char)) bitNotNumber = [[NSMutableNumber alloc] initWithChar:~_number.get<char>()];
-		else if (_number.reserved[0] == sizeof(short)) bitNotNumber = [[NSMutableNumber alloc] initWithShort:~_number.get<short>()];
-		else if (_number.reserved[0] == sizeof(int)) bitNotNumber = [[NSMutableNumber alloc] initWithInt:~_number.get<int>()];
-		else bitNotNumber = [[NSMutableNumber alloc] initWithLongLong:~_number.get<long long>()];
+		if (_number.reserved[0] == sizeof(char)) bitNotNumber = [[self.class alloc] initWithChar:~_number.get<char>()];
+		else if (_number.reserved[0] == sizeof(short)) bitNotNumber = [[self.class alloc] initWithShort:~_number.get<short>()];
+		else if (_number.reserved[0] == sizeof(int)) bitNotNumber = [[self.class alloc] initWithInt:~_number.get<int>()];
+		else bitNotNumber = [[self.class alloc] initWithLongLong:~_number.get<long long>()];
 	}
 	_number.unlock();
 	return bitNotNumber;
@@ -234,18 +234,18 @@
 	NSMutableNumber * plusOneNumber = nil;
 	_number.lock();
 	if (_number.isUnsigned()) {
-		if (_number.reserved[0] == sizeof(unsigned char)) plusOneNumber = [[NSMutableNumber alloc] initWithUnsignedChar:_number.get<unsigned char>() + 1];
-		else if (_number.reserved[0] == sizeof(unsigned short)) plusOneNumber = [[NSMutableNumber alloc] initWithUnsignedShort:_number.get<unsigned short>() + 1];
-		else if (_number.reserved[0] == sizeof(unsigned int)) plusOneNumber = [[NSMutableNumber alloc] initWithUnsignedInt:_number.get<unsigned int>() + 1];
-		else plusOneNumber = [[NSMutableNumber alloc] initWithUnsignedLongLong:_number.get<unsigned long long>() + 1];
+		if (_number.reserved[0] == sizeof(unsigned char)) plusOneNumber = [[self.class alloc] initWithUnsignedChar:_number.get<unsigned char>() + 1];
+		else if (_number.reserved[0] == sizeof(unsigned short)) plusOneNumber = [[self.class alloc] initWithUnsignedShort:_number.get<unsigned short>() + 1];
+		else if (_number.reserved[0] == sizeof(unsigned int)) plusOneNumber = [[self.class alloc] initWithUnsignedInt:_number.get<unsigned int>() + 1];
+		else plusOneNumber = [[self.class alloc] initWithUnsignedLongLong:_number.get<unsigned long long>() + 1];
 	} else if (_number.isReal()) {
-		if (_number.reserved[0] == sizeof(float)) plusOneNumber = [[NSMutableNumber alloc] initWithFloat:_number.get<float>() + 1.0];
-		else plusOneNumber = [[NSMutableNumber alloc] initWithDouble:_number.get<double>() + 1.0];
+		if (_number.reserved[0] == sizeof(float)) plusOneNumber = [[self.class alloc] initWithFloat:_number.get<float>() + 1.0];
+		else plusOneNumber = [[self.class alloc] initWithDouble:_number.get<double>() + 1.0];
 	} else {
-		if (_number.reserved[0] == sizeof(char)) plusOneNumber = [[NSMutableNumber alloc] initWithChar:_number.get<char>() + 1];
-		else if (_number.reserved[0] == sizeof(short)) plusOneNumber = [[NSMutableNumber alloc] initWithShort:_number.get<short>() + 1];
-		else if (_number.reserved[0] == sizeof(int)) plusOneNumber = [[NSMutableNumber alloc] initWithInt:_number.get<int>() + 1];
-		else plusOneNumber = [[NSMutableNumber alloc] initWithLongLong:_number.get<long long>() + 1];
+		if (_number.reserved[0] == sizeof(char)) plusOneNumber = [[self.class alloc] initWithChar:_number.get<char>() + 1];
+		else if (_number.reserved[0] == sizeof(short)) plusOneNumber = [[self.class alloc] initWithShort:_number.get<short>() + 1];
+		else if (_number.reserved[0] == sizeof(int)) plusOneNumber = [[self.class alloc] initWithInt:_number.get<int>() + 1];
+		else plusOneNumber = [[self.class alloc] initWithLongLong:_number.get<long long>() + 1];
 	}
 	_number.unlock();
 	return plusOneNumber;
@@ -257,18 +257,18 @@
 	NSMutableNumber * subOneNumber = nil;
 	_number.lock();
 	if (_number.isUnsigned()) {
-		if (_number.reserved[0] == sizeof(unsigned char)) subOneNumber = [[NSMutableNumber alloc] initWithUnsignedChar:_number.get<unsigned char>() - 1];
-		else if (_number.reserved[0] == sizeof(unsigned short)) subOneNumber = [[NSMutableNumber alloc] initWithUnsignedShort:_number.get<unsigned short>() - 1];
-		else if (_number.reserved[0] == sizeof(unsigned int)) subOneNumber = [[NSMutableNumber alloc] initWithUnsignedInt:_number.get<unsigned int>() - 1];
-		else subOneNumber = [[NSMutableNumber alloc] initWithUnsignedLongLong:_number.get<unsigned long long>() - 1];
+		if (_number.reserved[0] == sizeof(unsigned char)) subOneNumber = [[self.class alloc] initWithUnsignedChar:_number.get<unsigned char>() - 1];
+		else if (_number.reserved[0] == sizeof(unsigned short)) subOneNumber = [[self.class alloc] initWithUnsignedShort:_number.get<unsigned short>() - 1];
+		else if (_number.reserved[0] == sizeof(unsigned int)) subOneNumber = [[self.class alloc] initWithUnsignedInt:_number.get<unsigned int>() - 1];
+		else subOneNumber = [[self.class alloc] initWithUnsignedLongLong:_number.get<unsigned long long>() - 1];
 	} else if (_number.isReal()) {
-		if (_number.reserved[0] == sizeof(float)) subOneNumber = [[NSMutableNumber alloc] initWithFloat:_number.get<float>() - 1.0];
-		else subOneNumber = [[NSMutableNumber alloc] initWithDouble:_number.get<double>() - 1.0];
+		if (_number.reserved[0] == sizeof(float)) subOneNumber = [[self.class alloc] initWithFloat:_number.get<float>() - 1.0];
+		else subOneNumber = [[self.class alloc] initWithDouble:_number.get<double>() - 1.0];
 	} else {
-		if (_number.reserved[0] == sizeof(char)) subOneNumber = [[NSMutableNumber alloc] initWithChar:_number.get<char>() - 1];
-		else if (_number.reserved[0] == sizeof(short)) subOneNumber = [[NSMutableNumber alloc] initWithShort:_number.get<short>() - 1];
-		else if (_number.reserved[0] == sizeof(int)) subOneNumber = [[NSMutableNumber alloc] initWithInt:_number.get<int>() - 1];
-		else subOneNumber = [[NSMutableNumber alloc] initWithLongLong:_number.get<long long>() - 1];
+		if (_number.reserved[0] == sizeof(char)) subOneNumber = [[self.class alloc] initWithChar:_number.get<char>() - 1];
+		else if (_number.reserved[0] == sizeof(short)) subOneNumber = [[self.class alloc] initWithShort:_number.get<short>() - 1];
+		else if (_number.reserved[0] == sizeof(int)) subOneNumber = [[self.class alloc] initWithInt:_number.get<int>() - 1];
+		else subOneNumber = [[self.class alloc] initWithLongLong:_number.get<long long>() - 1];
 	}
 	_number.unlock();
 	return subOneNumber;
@@ -723,29 +723,29 @@
 @implementation NSMutableNumber (NSMutableNumberCreation)
 
 
-+ (nonnull NSMutableNumber *)infinity { return [[NSMutableNumber alloc] initWithDouble:INFINITY]; }
-+ (nonnull NSMutableNumber *)minusInfinity { return [[NSMutableNumber alloc] initWithDouble:-INFINITY]; }
-+ (nonnull NSMutableNumber *)notANumber { return [[NSMutableNumber alloc] initWithDouble:NAN]; }
-+ (nonnull NSMutableNumber *)zero { return [[NSMutableNumber alloc] initWithLongLong:0]; }
-+ (nonnull NSMutableNumber *)negativeZero { return [[NSMutableNumber alloc] initWithDouble:-0.0]; }
-+ (nonnull NSMutableNumber *)one { return [[NSMutableNumber alloc] initWithLongLong:1]; }
++ (nonnull NSMutableNumber *)infinity { return [[self alloc] initWithDouble:INFINITY]; }
++ (nonnull NSMutableNumber *)minusInfinity { return [[self alloc] initWithDouble:-INFINITY]; }
++ (nonnull NSMutableNumber *)notANumber { return [[self alloc] initWithDouble:NAN]; }
++ (nonnull NSMutableNumber *)zero { return [[self alloc] initWithLongLong:0]; }
++ (nonnull NSMutableNumber *)negativeZero { return [[self alloc] initWithDouble:-0.0]; }
++ (nonnull NSMutableNumber *)one { return [[self alloc] initWithLongLong:1]; }
 
-+ (nonnull NSMutableNumber *) numberWithChar:(char) number { return [[NSMutableNumber alloc] initWithChar:number]; }
-+ (nonnull NSMutableNumber *) numberWithUnsignedChar:(unsigned char) number { return [[NSMutableNumber alloc] initWithUnsignedChar:number]; }
-+ (nonnull NSMutableNumber *) numberWithShort:(short) number { return [[NSMutableNumber alloc] initWithShort:number]; }
-+ (nonnull NSMutableNumber *) numberWithUnsignedShort:(unsigned short) number { return [[NSMutableNumber alloc] initWithUnsignedShort:number]; }
-+ (nonnull NSMutableNumber *) numberWithUnichar:(unichar) number { return [[NSMutableNumber alloc] initWithUnichar:number]; }
-+ (nonnull NSMutableNumber *) numberWithInt:(int) number { return [[NSMutableNumber alloc] initWithInt:number]; }
-+ (nonnull NSMutableNumber *) numberWithUnsignedInt:(unsigned int) number { return [[NSMutableNumber alloc] initWithUnsignedInt:number]; }
-+ (nonnull NSMutableNumber *) numberWithLong:(long) number { return [[NSMutableNumber alloc] initWithLong:number]; }
-+ (nonnull NSMutableNumber *) numberWithUnsignedLong:(unsigned long) number { return [[NSMutableNumber alloc] initWithUnsignedLong:number]; }
-+ (nonnull NSMutableNumber *) numberWithLongLong:(long long) number { return [[NSMutableNumber alloc] initWithLongLong:number]; }
-+ (nonnull NSMutableNumber *) numberWithUnsignedLongLong:(unsigned long long) number { return [[NSMutableNumber alloc] initWithUnsignedLongLong:number]; }
-+ (nonnull NSMutableNumber *) numberWithFloat:(float) number { return [[NSMutableNumber alloc] initWithFloat:number]; }
-+ (nonnull NSMutableNumber *) numberWithDouble:(double) number { return [[NSMutableNumber alloc] initWithDouble:number]; }
-+ (nonnull NSMutableNumber *) numberWithBool:(BOOL) number { return [[NSMutableNumber alloc] initWithBool:number]; }
-+ (nonnull NSMutableNumber *) numberWithInteger:(NSInteger) number { return [[NSMutableNumber alloc] initWithInteger:number]; }
-+ (nonnull NSMutableNumber *) numberWithUnsignedInteger:(NSUInteger) number { return [[NSMutableNumber alloc] initWithUnsignedInteger:number]; }
++ (nonnull NSMutableNumber *) numberWithChar:(char) number { return [[self alloc] initWithChar:number]; }
++ (nonnull NSMutableNumber *) numberWithUnsignedChar:(unsigned char) number { return [[self alloc] initWithUnsignedChar:number]; }
++ (nonnull NSMutableNumber *) numberWithShort:(short) number { return [[self alloc] initWithShort:number]; }
++ (nonnull NSMutableNumber *) numberWithUnsignedShort:(unsigned short) number { return [[self alloc] initWithUnsignedShort:number]; }
++ (nonnull NSMutableNumber *) numberWithUnichar:(unichar) number { return [[self alloc] initWithUnichar:number]; }
++ (nonnull NSMutableNumber *) numberWithInt:(int) number { return [[self alloc] initWithInt:number]; }
++ (nonnull NSMutableNumber *) numberWithUnsignedInt:(unsigned int) number { return [[self alloc] initWithUnsignedInt:number]; }
++ (nonnull NSMutableNumber *) numberWithLong:(long) number { return [[self alloc] initWithLong:number]; }
++ (nonnull NSMutableNumber *) numberWithUnsignedLong:(unsigned long) number { return [[self alloc] initWithUnsignedLong:number]; }
++ (nonnull NSMutableNumber *) numberWithLongLong:(long long) number { return [[self alloc] initWithLongLong:number]; }
++ (nonnull NSMutableNumber *) numberWithUnsignedLongLong:(unsigned long long) number { return [[self alloc] initWithUnsignedLongLong:number]; }
++ (nonnull NSMutableNumber *) numberWithFloat:(float) number { return [[self alloc] initWithFloat:number]; }
++ (nonnull NSMutableNumber *) numberWithDouble:(double) number { return [[self alloc] initWithDouble:number]; }
++ (nonnull NSMutableNumber *) numberWithBool:(BOOL) number { return [[self alloc] initWithBool:number]; }
++ (nonnull NSMutableNumber *) numberWithInteger:(NSInteger) number { return [[self alloc] initWithInteger:number]; }
++ (nonnull NSMutableNumber *) numberWithUnsignedInteger:(NSUInteger) number { return [[self alloc] initWithUnsignedInteger:number]; }
 
 @end
 

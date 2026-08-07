@@ -4,15 +4,27 @@
 [![License](https://img.shields.io/github/license/belisoful/NSMutableNumber.svg)](https://github.com/belisoful/NSMutableNumber/blob/master/LICENSE)
 
 
-# NSMutableNumber 1.2.5 (June 2026)
+# NSMutableNumber 1.3.0 (August 2026)
 NSMutableNumber - full thread-safe mutable NSNumber implementation with NSNumber extensions.
 
 
-### Installation with CocoaPods
-#### Podfile
+### Installation
+
+#### Swift Package Manager
+Add the package to your `Package.swift` dependencies:
+```swift
+.package(url: "https://github.com/belisoful/NSMutableNumber.git", from: "1.3.0")
+```
+or add it in Xcode via **File ▸ Add Package Dependencies…**.
+
+#### CocoaPods
 ```ruby
 pod 'NSMutableNumber'
 ```
+
+#### Manual
+Add `NSMutableNumber.h`, `NSMutableNumber.hpp`, and `NSMutableNumber.mm` to your target, or add
+`NSMutableNumber.xcodeproj` as a subproject and link the framework.
 
 ### Features
 - This class inherits all **NSNumber** protocols and overrides required methods for duplicate **NSNumber** read functionality.
