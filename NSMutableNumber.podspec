@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
 
 # Common settings
   s.name         = "NSMutableNumber"
-  s.version      = "1.3.1"
+  s.version      = "1.3.2"
   s.summary      = "Thread-safe mutable NSNumber, a genuine NSNumber subclass, with NSNumber extensions."
   s.description  = <<-DESC
 NSMutableNumber is a full thread-safe mutable NSNumber implementation. It is a genuine

@@ -1,4 +1,13 @@
-Changes on version 1.3.1 (2026-09-21, current):
+Changes on version 1.3.2 (2026-09-21, current):
+- bitNotValue on NSMutableNumber is now declared readonly. It was declared readwrite, but
+  no setter was ever implemented, so assigning to it compiled and then crashed at runtime
+  with an unrecognized selector. Assignment is now a compile error. Use bitNot to obtain a
+  new number holding the inverted bits.
+- Doc fix: negativeZero was described as "zero"; it returns -0.0.
+- Doc fix: unicharValue on the NSNumber category described a setter it does not have. The
+  setter lives on NSMutableNumber and is unchanged.
+
+Changes on version 1.3.1 (2026-09-21):
 - Xcode 27 support. Xcode 27's SDKs raised the minimum deployment targets, and the
   previous targets (macOS 11.0, iOS 12.0, tvOS 12.0, watchOS 4.0) fail with "the range of
   supported deployment target versions is ..." in the Xcode project and in CocoaPods.
