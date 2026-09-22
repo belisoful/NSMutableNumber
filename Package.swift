@@ -4,10 +4,10 @@ import PackageDescription
 let package = Package(
     name: "NSMutableNumber",
     platforms: [
-        .macOS(.v11),
-        .iOS(.v12),
-        .tvOS(.v12),
-        .watchOS(.v4),
+        .macOS(.v12),
+        .iOS(.v15),
+        .tvOS(.v15),
+        .watchOS(.v9),
     ],
     products: [
         .library(name: "NSMutableNumber", targets: ["NSMutableNumber"]),

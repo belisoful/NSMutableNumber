@@ -1,4 +1,23 @@
-Changes on version 1.3.0 (2026-08-07, current):
+Changes on version 1.3.1 (2026-09-21, current):
+- Xcode 27 support. Xcode 27's SDKs raised the minimum deployment targets, and the
+  previous targets (macOS 11.0, iOS 12.0, tvOS 12.0, watchOS 4.0) fail with "the range of
+  supported deployment target versions is ..." in the Xcode project and in CocoaPods.
+  Minimums are now macOS 12.0, iOS 15.0, tvOS 15.0, and watchOS 9.0 in the Xcode project,
+  Package.swift, and the podspec.
+- Silence -Wobjc-designated-initializers in NSMutableNumber.mm (32 warnings per build).
+  NSNumber's designated initializers raise when chained to from a subclass, so the
+  warning cannot be resolved by chaining; see the comment in the source.
+- The iOS example app (the test host for the iOS test bundle) adopts the UIScene life cycle
+  (SceneDelegate + UIApplicationSceneManifest). Apps built with the iOS 27 SDK that still use
+  the legacy app-delegate window fail to launch on iOS 27 with "UIScene life cycle is
+  required for apps built with this SDK", which made every iOS 27 simulator test run fail.
+- Test targets only (not the library) now target macOS 14 / iOS 17, matching the XCTest
+  that ships in Xcode 27, which silences the "linking with dylib built for newer version"
+  linker warnings.
+- Xcode project: the Foundation.framework reference pointed at a hardcoded MacOSX26.2.sdk
+  path; it is now SDK-relative. The example app's UIRequiredDeviceCapabilities is arm64.
+
+Changes on version 1.3.0 (2026-08-07):
 - NSMutableNumber is now a genuine NSNumber subclass (was NSObject with an isKindOfClass:
   override). Equality with plain NSNumber is now symmetric, NSSet/NSDictionary lookups work
   in both directions, CFNumberRef toll-free bridging works, and inherited NSNumber API such
