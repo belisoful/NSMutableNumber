@@ -83,7 +83,7 @@
 
 
 /**
- @brief Initialize number object with ponter to the value and `\@encode` value type.
+ @brief Initialize number object with pointer to the value and `\@encode` value type.
  @param value Pointer to the value, should not be nil.
  @param type Type string, returned by the `\@encode`, should not be nil.
  @warning Used assert for track nullability of the parameters.

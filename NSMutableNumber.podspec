@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
 
 # Common settings
   s.name         = "NSMutableNumber"
-  s.version      = "1.3.2"
+  s.version      = "1.3.3"
   s.summary      = "Thread-safe mutable NSNumber, a genuine NSNumber subclass, with NSNumber extensions."
   s.description  = <<-DESC
 NSMutableNumber is a full thread-safe mutable NSNumber implementation. It is a genuine
@@ -13,7 +13,7 @@ extensions for arithmetic, bit operations, and named constants.
   s.homepage     = "https://github.com/belisoful/NSMutableNumber"
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
   s.author       = { "Oleh Kulykov" => "info@resident.name" }
-  s.source       = { :git => 'https://github.com/belisoful/NSMutableNumber.git', :tag => s.version.to_s }
+  s.source       = { :git => 'https://github.com/belisoful/NSMutableNumber.git', :tag => "v#{s.version}" }
 
 # Platforms
   s.ios.deployment_target = "15.0"
